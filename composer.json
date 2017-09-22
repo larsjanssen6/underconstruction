@@ -1,10 +1,12 @@
 {
     "name": "larsjanssen6/underconstruction",
     "license": "MIT",
+    "homepage": "https://github.com/larsjanssen6/underconstruction",
     "authors": [
         {
             "name": "Lars Janssen",
-            "email": "larsjanssen64@gmail.com"
+            "email": "larsjanssen64@gmail.com",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -22,10 +24,7 @@
         "laravel": {
             "providers": [
                 "LarsJanssen\\underconstruction\\UnderConstructionServiceProvider"
-            ],
-            "aliases": {
-                "Construction": "LarsJanssen\\underconstruction\\ConstructionFacade"
-            }
+            ]
         }
     }
 }
