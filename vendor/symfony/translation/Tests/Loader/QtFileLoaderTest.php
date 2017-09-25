@@ -20,7 +20,7 @@ class QtFileLoaderTest extends TestCase
     public function testLoad()
     {
         $loader = new QtFileLoader();
-        $resource = __DIR__.'/../fixtures/resources.ts';
+        $resource = __DIR__ . '/../fixtures/resources.ts';
         $catalogue = $loader->load($resource, 'en', 'resources');
 
         $this->assertEquals(array('foo' => 'bar'), $catalogue->all('resources'));
@@ -54,14 +54,14 @@ class QtFileLoaderTest extends TestCase
     public function testLoadInvalidResource()
     {
         $loader = new QtFileLoader();
-        $resource = __DIR__.'/../fixtures/invalid-xml-resources.xlf';
+        $resource = __DIR__ . '/../fixtures/invalid-xml-resources.xlf';
         $loader->load($resource, 'en', 'domain1');
     }
 
     public function testLoadEmptyResource()
     {
         $loader = new QtFileLoader();
-        $resource = __DIR__.'/../fixtures/empty.xlf';
+        $resource = __DIR__ . '/../fixtures/empty.xlf';
 
         if (method_exists($this, 'expectException')) {
             $this->expectException('Symfony\Component\Translation\Exception\InvalidResourceException');

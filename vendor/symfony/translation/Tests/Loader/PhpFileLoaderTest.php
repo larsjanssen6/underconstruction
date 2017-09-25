@@ -20,7 +20,7 @@ class PhpFileLoaderTest extends TestCase
     public function testLoad()
     {
         $loader = new PhpFileLoader();
-        $resource = __DIR__.'/../fixtures/resources.php';
+        $resource = __DIR__ . '/../fixtures/resources.php';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $this->assertEquals(array('foo' => 'bar'), $catalogue->all('domain1'));

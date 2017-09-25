@@ -297,7 +297,7 @@ class CarbonInterval extends DateInterval
         static::translator()->setLocale($locale);
 
         // Ensure the locale has been loaded.
-        static::translator()->addResource('array', require __DIR__.'/Lang/'.$locale.'.php', $locale);
+        static::translator()->addResource('array', require __DIR__ . '/Lang/' .$locale.'.php', $locale);
     }
 
     ///////////////////////////////////////////////////////////////////

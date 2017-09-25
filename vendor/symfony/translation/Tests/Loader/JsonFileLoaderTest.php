@@ -20,7 +20,7 @@ class JsonFileLoaderTest extends TestCase
     public function testLoad()
     {
         $loader = new JsonFileLoader();
-        $resource = __DIR__.'/../fixtures/resources.json';
+        $resource = __DIR__ . '/../fixtures/resources.json';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $this->assertEquals(array('foo' => 'bar'), $catalogue->all('domain1'));
@@ -31,7 +31,7 @@ class JsonFileLoaderTest extends TestCase
     public function testLoadDoesNothingIfEmpty()
     {
         $loader = new JsonFileLoader();
-        $resource = __DIR__.'/../fixtures/empty.json';
+        $resource = __DIR__ . '/../fixtures/empty.json';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $this->assertEquals(array(), $catalogue->all('domain1'));
@@ -56,7 +56,7 @@ class JsonFileLoaderTest extends TestCase
     public function testParseException()
     {
         $loader = new JsonFileLoader();
-        $resource = __DIR__.'/../fixtures/malformed.json';
+        $resource = __DIR__ . '/../fixtures/malformed.json';
         $loader->load($resource, 'en', 'domain1');
     }
 }

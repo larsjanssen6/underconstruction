@@ -23,7 +23,7 @@ class IcuResFileLoaderTest extends LocalizedTestCase
     {
         // resource is build using genrb command
         $loader = new IcuResFileLoader();
-        $resource = __DIR__.'/../fixtures/resourcebundle/res';
+        $resource = __DIR__ . '/../fixtures/resourcebundle/res';
         $catalogue = $loader->load($resource, 'en', 'domain1');
 
         $this->assertEquals(array('foo' => 'bar'), $catalogue->all('domain1'));
@@ -46,6 +46,6 @@ class IcuResFileLoaderTest extends LocalizedTestCase
     public function testLoadInvalidResource()
     {
         $loader = new IcuResFileLoader();
-        $loader->load(__DIR__.'/../fixtures/resourcebundle/corrupted', 'en', 'domain1');
+        $loader->load(__DIR__ . '/../fixtures/resourcebundle/corrupted', 'en', 'domain1');
     }
 }

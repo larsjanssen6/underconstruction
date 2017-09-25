@@ -24,6 +24,6 @@ class PoFileDumperTest extends TestCase
 
         $dumper = new PoFileDumper();
 
-        $this->assertStringEqualsFile(__DIR__.'/../fixtures/resources.po', $dumper->formatCatalogue($catalogue, 'messages'));
+        $this->assertStringEqualsFile(__DIR__ . '/../fixtures/resources.po', $dumper->formatCatalogue($catalogue, 'messages'));
     }
 }

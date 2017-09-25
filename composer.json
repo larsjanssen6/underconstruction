@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "LarsJanssen\\underconstruction\\": "src/"
+            "LarsJanssen\\UnderConstruction\\": "src/"
         }
     },
     "minimum-stability": "dev",
@@ -23,7 +23,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LarsJanssen\\underconstruction\\UnderConstructionServiceProvider"
+                "LarsJanssen\\UnderConstruction\\UnderConstructionServiceProvider"
             ]
         }
     }

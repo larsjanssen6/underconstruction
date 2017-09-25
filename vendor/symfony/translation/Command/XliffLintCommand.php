@@ -109,7 +109,7 @@ EOF
 
         $document = new \DOMDocument();
         $document->loadXML($content);
-        if ($document->schemaValidate(__DIR__.'/../Resources/schemas/xliff-core-1.2-strict.xsd')) {
+        if ($document->schemaValidate(__DIR__ . '/../Resources/schemas/xliff-core-1.2-strict.xsd')) {
             return array('file' => $file, 'valid' => true);
         }
 

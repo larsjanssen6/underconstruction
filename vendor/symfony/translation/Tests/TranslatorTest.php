@@ -290,20 +290,20 @@ class TranslatorTest extends TestCase
     {
         $translator = new Translator('en_GB', new MessageSelector());
         $translator->addLoader('yml', new \Symfony\Component\Translation\Loader\YamlFileLoader());
-        $translator->addResource('yml', __DIR__.'/fixtures/empty.yml', 'en_GB');
-        $translator->addResource('yml', __DIR__.'/fixtures/resources.yml', 'en');
+        $translator->addResource('yml', __DIR__ . '/fixtures/empty.yml', 'en_GB');
+        $translator->addResource('yml', __DIR__ . '/fixtures/resources.yml', 'en');
 
         // force catalogue loading
         $this->assertEquals('bar', $translator->trans('foo', array()));
 
         $resources = $translator->getCatalogue('en')->getResources();
         $this->assertCount(1, $resources);
-        $this->assertContains(__DIR__.DIRECTORY_SEPARATOR.'fixtures'.DIRECTORY_SEPARATOR.'resources.yml', $resources);
+        $this->assertContains(__DIR__.DIRECTORY_SEPARATOR, $resources);
 
         $resources = $translator->getCatalogue('en_GB')->getResources();
         $this->assertCount(2, $resources);
-        $this->assertContains(__DIR__.DIRECTORY_SEPARATOR.'fixtures'.DIRECTORY_SEPARATOR.'empty.yml', $resources);
-        $this->assertContains(__DIR__.DIRECTORY_SEPARATOR.'fixtures'.DIRECTORY_SEPARATOR.'resources.yml', $resources);
+        $this->assertContains(__DIR__.DIRECTORY_SEPARATOR, $resources);
+        $this->assertContains(__DIR__.DIRECTORY_SEPARATOR, $resources);
     }
 
     /**

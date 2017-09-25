@@ -24,7 +24,7 @@ class ComposerStaticInit5b6386c0f1b60bda5b893c09d2c68c79
         ),
         'L' => 
         array (
-            'LarsJanssen\\underconstruction\\' => 30,
+            'LarsJanssen\\UnderConstruction\\' => 30,
         ),
         'I' => 
         array (
@@ -58,7 +58,7 @@ class ComposerStaticInit5b6386c0f1b60bda5b893c09d2c68c79
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'LarsJanssen\\underconstruction\\' => 
+        'LarsJanssen\\UnderConstruction\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
