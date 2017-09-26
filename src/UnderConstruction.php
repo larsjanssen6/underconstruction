@@ -31,7 +31,6 @@ class UnderConstruction
 
     protected function hasAccess(Request $request)
     {
-        dd(session()->all());
         return session()->has('can_visit');
     }
 }
