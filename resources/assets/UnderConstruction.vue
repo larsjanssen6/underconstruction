@@ -1,7 +1,7 @@
 <template>
     <div class="flex-center flex-column full-height-vh" :class="{ body_warning: wrongCode, body_success: success }">
         <div class="title">
-            Under construction
+            Under Construction
         </div>
 
         <div class="panel flex flex-column" :class="{ wrong_code: wrongCode, success_code: success }" v-cloak>
@@ -134,40 +134,7 @@
         },
 
         mounted() {
-            document.addEventListener("keydown", (e) => {
-                switch (e.keyCode) {
-                    case 49:
-                        this.addNumber(1);
-                        break;
-                    case 50:
-                        this.addNumber(2);
-                        break;
-                    case 51:
-                        this.addNumber(3);
-                        break;
-                    case 52:
-                        this.addNumber(4);
-                        break;
-                    case 53:
-                        this.addNumber(5);
-                        break;
-                    case 54:
-                        this.addNumber(6);
-                        break;
-                    case 55:
-                        this.addNumber(7);
-                        break;
-                    case 56:
-                        this.addNumber(8);
-                        break;
-                    case 57:
-                        this.addNumber(9);
-                        break;
-                    case 8:
-                        this.back();
-                        break;
-                }
-            });
+            this.registerKeys();
         },
 
         created() {
@@ -182,7 +149,7 @@
                     axios.post("/under/check", { "code": this.code.join("") })
                         .then(() => {
                             this.success = true;
-                            window.location.href = '/';
+                            //window.location.href = '/';
                         })
                         .catch(() => {
                             this.wrongCode = true;
@@ -211,6 +178,43 @@
 
             codeIsComplete() {
                 return this.position == 4;
+            },
+
+            registerKeys() {
+                document.addEventListener("keydown", (e) => {
+                    switch (e.keyCode) {
+                        case 49:
+                            this.addNumber(1);
+                            break;
+                        case 50:
+                            this.addNumber(2);
+                            break;
+                        case 51:
+                            this.addNumber(3);
+                            break;
+                        case 52:
+                            this.addNumber(4);
+                            break;
+                        case 53:
+                            this.addNumber(5);
+                            break;
+                        case 54:
+                            this.addNumber(6);
+                            break;
+                        case 55:
+                            this.addNumber(7);
+                            break;
+                        case 56:
+                            this.addNumber(8);
+                            break;
+                        case 57:
+                            this.addNumber(9);
+                            break;
+                        case 8:
+                            this.back();
+                            break;
+                    }
+                });
             }
         }
     }
