@@ -29,7 +29,10 @@ class UnderConstructionServiceProvider extends ServiceProvider
         $routeConfig = [
             'namespace' => 'LarsJanssen\UnderConstruction\Controllers',
             'prefix' => 'under',
-        //    'middleware' => [DebugbarEnabled::class],
+            'middleware' => [
+                'web',
+                // DebugbarEnabled::class,
+            ],
         ];
         $this->getRouter()->group($routeConfig, function($router) {
             $router->post('check', [
