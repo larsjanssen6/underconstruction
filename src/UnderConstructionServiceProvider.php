@@ -28,7 +28,7 @@ class UnderConstructionServiceProvider extends ServiceProvider
 
         $routeConfig = [
             'namespace' => 'LarsJanssen\UnderConstruction\Controllers',
-            'prefix' => 'larsjanssen',
+            'prefix' => 'under',
         //    'middleware' => [DebugbarEnabled::class],
         ];
         $this->getRouter()->group($routeConfig, function($router) {
@@ -37,7 +37,7 @@ class UnderConstructionServiceProvider extends ServiceProvider
                 'as' => 'underconstruction.check',
             ]);
 
-            $router->get('under-construction', [
+            $router->get('construction', [
                 'uses' => 'CodeController@index',
                 'as' => 'underconstruction.index',
             ]);

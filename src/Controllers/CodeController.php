@@ -25,9 +25,7 @@ class CodeController extends Controller
         if ($hasher->check($request->code, $hash)) {
             session(['can_visit' => true]);
 
-            return response([
-                "status" => "success"
-            ]);
+            return json_encode('test');
         }
 
         return response([

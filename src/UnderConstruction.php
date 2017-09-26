@@ -23,7 +23,7 @@ class UnderConstruction
         }
 
         if (!$this->hasAccess($request)) {
-            return new RedirectResponse('/larsjanssen/under-construction');
+            return new RedirectResponse('/under/construction');
         }
 
         return $next($request);
@@ -31,6 +31,7 @@ class UnderConstruction
 
     protected function hasAccess(Request $request)
     {
+        dd(session()->all());
         return session()->has('can_visit');
     }
 }

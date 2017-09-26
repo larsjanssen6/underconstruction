@@ -133,6 +133,43 @@
             }
         },
 
+        mounted() {
+            document.addEventListener("keydown", (e) => {
+                switch (e.keyCode) {
+                    case 49:
+                        this.addNumber(1);
+                        break;
+                    case 50:
+                        this.addNumber(2);
+                        break;
+                    case 51:
+                        this.addNumber(3);
+                        break;
+                    case 52:
+                        this.addNumber(4);
+                        break;
+                    case 53:
+                        this.addNumber(5);
+                        break;
+                    case 54:
+                        this.addNumber(6);
+                        break;
+                    case 55:
+                        this.addNumber(7);
+                        break;
+                    case 56:
+                        this.addNumber(8);
+                        break;
+                    case 57:
+                        this.addNumber(9);
+                        break;
+                    case 8:
+                        this.back();
+                        break;
+                }
+            });
+        },
+
         created() {
             this.resetCode();
         },
@@ -142,7 +179,7 @@
                 this.setNumber(number);
 
                 if(this.codeIsComplete()) {
-                    axios.post("/larsjanssen/check", { "code": this.code.join("") })
+                    axios.post("/under/check", { "code": this.code.join("") })
                         .then(() => {
                             this.success = true;
                             window.location.href = '/';
@@ -186,7 +223,7 @@
     $warning: #e74c3c
     $box-shadow: 0 2px 3px 0
     $shadow-color: rgba(0,0,0,.16)
-    $mobile-break-point: 720px
+    $mobile-break-point: 750px
 
     [v-cloak]
         display: none
@@ -245,7 +282,7 @@
                 font-size: 15px
                 font-weight: 900
         &:hover
-            box-shadow: $box-shadow rgba(0,0,0,.16)
+            box-shadow: $box-shadow $shadow-color
 
     .title
         font-size: 84px

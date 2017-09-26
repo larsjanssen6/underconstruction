@@ -22,6 +22,6 @@
    <under-construction></under-construction>
 </div>
 
-<script src="/larsjanssen/js"></script>
+<script src="/under/js"></script>
 </body>
 </html>
