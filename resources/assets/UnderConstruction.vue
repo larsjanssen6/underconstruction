@@ -142,6 +142,11 @@
         },
 
         methods: {
+
+            /**
+             * Add entered number to code array.
+             */
+
             addNumber(number) {
                 this.setNumber(number);
 
@@ -149,7 +154,7 @@
                     axios.post("/under/check", { "code": this.code.join("") })
                         .then(() => {
                             this.success = true;
-                            //window.location.href = '/';
+                            window.location.href = '/';
                         })
                         .catch(() => {
                             this.wrongCode = true;
@@ -171,14 +176,26 @@
                 this.position = 0;
             },
 
+            /**
+             * Set number at the correct array position.
+             */
+
             setNumber(number) {
                 Vue.set(this.code, this.position, number);
                 this.position++;
             },
 
+            /**
+             * Check if all numbers are entered.
+             */
+
             codeIsComplete() {
                 return this.position == 4;
             },
+
+            /**
+             * Register all keyboard numbers.
+             */
 
             registerKeys() {
                 document.addEventListener("keydown", (e) => {
