@@ -20,12 +20,14 @@ class CodeController extends Controller
      */
     public function check(Request $request, Hasher $hasher)
     {
-        $hash = file_get_contents(__DIR__ . '/../Commands/temp.txt');
+        $hash = file_get_contents(__DIR__ . '/../Commands/hash.txt');
 
         if ($hasher->check($request->code, $hash)) {
             session(['can_visit' => true]);
 
-            return json_encode('test');
+            return response([
+                "status" => "success"
+            ]);
         }
 
         return response([

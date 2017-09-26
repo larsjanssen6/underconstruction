@@ -2,3 +2,5 @@ node_modules
 vendor
 .idea
 npm-debug.log
+*.txt
+*.txt
