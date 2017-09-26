@@ -3,4 +3,4 @@ vendor
 .idea
 npm-debug.log
 *.txt
-*.txt
+composer.lock
