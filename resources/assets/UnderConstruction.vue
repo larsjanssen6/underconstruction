@@ -180,102 +180,78 @@
 </script>
 
 
-<style scoped>
-    html, body {
-        background-color: #F4F4F5;
-        color: #636b6f;
-        font-family: 'Raleway', sans-serif;
-        font-weight: 100;
-        height: 100vh;
-        margin: 0;
-    }
+<style lang="sass" scoped>
 
-    [v-cloak] {
-        display: none;
-    }
+    $success: #27ae60
+    $warning: #e74c3c
+    $box-shadow: 0 2px 3px 0
+    $shadow-color: rgba(0,0,0,.16)
+    $mobile-break-point: 720px
 
-    .body_warning {
-        color: #e74c3c;
-    }
+    [v-cloak]
+        display: none
 
-    .body_success {
-        color: #27ae60;
-    }
+    .body_warning
+        color: $warning
 
-    .flex {
-        display: flex;
-    }
+    .body_success
+        color: $success
 
-    .flex-one {
-        flex: 1;
-    }
+    .flex
+        display: flex
 
-    .flex-two {
-        flex: 1;
-    }
+    .flex-one
+        flex: 1
 
-    .flex-three {
-        flex: 3;
-    }
+    .flex-two
+        flex: 1
 
-    .full-height-vh {
-        height: 100vh;
-    }
+    .flex-three
+        flex: 3
 
-    .full-height {
-        height: 100%;
-    }
+    .full-height-vh
+        height: 100vh
 
-    .flex-center {
-        align-items: center;
-        display: flex;
-        justify-content: center;
-    }
+    .full-height
+        height: 100%
 
-    .flex-column {
-        flex-direction: column;
-    }
+    .flex-center
+        @extend .flex
+        align-items: center
+        justify-content: center
 
-    .panel {
-        width: 300px;
-        height: 400px;
-        background: #F8F8FA;
-        box-shadow: 0 2px 3px 0 rgba(0,0,0,.16);
-        border-radius: 6px;
-        overflow: hidden;
-    }
+    .flex-column
+        flex-direction: column
 
-    .wrong_code {
-        box-shadow: 0 2px 3px 0 #e74c3c;
-    }
+    .panel
+        width: 300px
+        height: 400px
+        background: #F8F8FA
+        box-shadow: $box-shadow $shadow-color
+        border-radius: 6px
 
-    .success_code {
-        box-shadow: 0 2px 3px 0 #27ae60;
-    }
+    .wrong_code
+        box-shadow: $box-shadow $warning
 
-    .number > div >  h3 {
-        font-size: 15px;
-        font-weight: 900;
-    }
+    .success_code
+        box-shadow: $box-shadow $success
 
-    .number {
-        margin: 10px;
-        border-bottom: 1px solid #DCDCDE;
-        cursor: pointer;
-    }
+    .number
+        margin: 10px
+        border-bottom: 1px solid #DCDCDE
+        cursor: pointer
+        div
+            h3
+                font-size: 15px
+                font-weight: 900
+        &:hover
+            box-shadow: $box-shadow rgba(0,0,0,.16)
 
-    .number:hover {
-        box-shadow: 0 2px 3px 0 rgba(0,0,0,.16);
-    }
+    .title
+        font-size: 84px
+        margin-bottom: 40px
 
-    .title {
-        font-size: 84px;
-        margin-bottom: 40px;
-    }
-
-    @media only screen and (max-width: 720px) {
-        .title {
-            display: none;
-        }
-    }
+    @media only screen and (max-width: $mobile-break-point)
+        .title
+            display: none
 </style>
