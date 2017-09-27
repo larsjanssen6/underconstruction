@@ -13,6 +13,7 @@
     <style>
         html, body {
             font-family: 'Raleway', sans-serif;
+            overflow-y: hidden;
         }
     </style>
 </head>
