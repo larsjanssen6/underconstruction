@@ -4,6 +4,10 @@
             Under Construction
         </div>
 
+        <div v-if="showThrottle">
+            <p>Too many attempts please try again in <strong>{{ counter }}</strong> seconds.</p>
+        </div>
+
         <div class="panel flex flex-column" :class="{ wrong_code: wrongCode, success_code: success }" v-cloak>
             <div class="flex-one">
                 <div class="flex full-height">
@@ -129,15 +133,14 @@
                 code: [],
                 position: 0,
                 wrongCode: false,
-                success: false
+                success: false,
+                showThrottle: false,
+                counter: 0
             }
         },
 
         mounted() {
             this.registerKeys();
-        },
-
-        created() {
             this.resetCode();
         },
 
@@ -148,20 +151,50 @@
              */
 
             addNumber(number) {
-                this.setNumber(number);
+                if(!this.showThrottle) {
+                    this.setNumber(number);
 
-                if(this.codeIsComplete()) {
-                    axios.post("/under/check", { "code": this.code.join("") })
-                        .then(() => {
-                            this.success = true;
-                            window.location.href = '/';
-                        })
-                        .catch(() => {
-                            this.wrongCode = true;
-                            setTimeout(() => this.wrongCode = false, 5000);
-                            this.resetCode();
-                        });
+                    if(this.codeIsComplete()) {
+                        axios.post("/under/check", { "code": this.code.join("") })
+                            .then(() => {
+                                this.success = true;
+                                window.location.href = '/';
+                            })
+                            .catch((error) => {
+                                this.wrongCode = true;
+                                this.showThrottle = false;
+                                setTimeout(() => this.wrongCode = false, 5000);
+
+                                if(this.tooManyAttempts(error)) {
+                                    this.countDown(error.response.data.seconds);
+                                    this.showThrottle = true;
+                                }
+
+                                this.resetCode();
+                            });
+                    }
                 }
+            },
+
+            /**
+             * Countdown from given throttle seconds.
+             */
+
+            countDown(seconds) {
+                this.counter = seconds;
+
+                window.setInterval(() => {
+                    if(this.counter == 0) {
+                        this.showThrottle = false;
+                        clearInterval(window.setInterval());
+                    }
+
+                    this.counter--;
+                }, 1000);
+            },
+
+            tooManyAttempts(error) {
+                return error.response.data.too_many_attemps;
             },
 
             back() {
