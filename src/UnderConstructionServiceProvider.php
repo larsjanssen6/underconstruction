@@ -31,7 +31,6 @@ class UnderConstructionServiceProvider extends ServiceProvider
             'prefix' => 'under',
             'middleware' => [
                 'web',
-                // DebugbarEnabled::class,
             ],
         ];
         $this->getRouter()->group($routeConfig, function($router) {

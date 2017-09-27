@@ -55,7 +55,6 @@ class SetCodeCommand extends Command
         else {
             $this->error('Wrong input. Code should contain 4 numbers.');
         }
-
     }
 
     /**
