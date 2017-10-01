@@ -1,7 +1,11 @@
 <template>
     <div class="flex-center flex-column full-height-vh" :class="{ body_warning: wrongCode, body_success: success }">
         <div class="title">
-            Under Construction
+            {{ title }}
+        </div>
+
+        <div v-if="showAttemptsLeft != false">
+            <p>Attempts left: <strong>{{ showAttemptsLeft }}.</strong></p>
         </div>
 
         <div v-if="showThrottle">
@@ -135,6 +139,7 @@
                 wrongCode: false,
                 success: false,
                 showThrottle: false,
+                showAttemptsLeft: false,
                 counter: 0
             }
         },
@@ -168,6 +173,11 @@
                                 if(this.tooManyAttempts(error)) {
                                     this.countDown(error.response.data.seconds);
                                     this.showThrottle = true;
+                                    this.showAttemptsLeft = false;
+                                }
+
+                                else {
+                                    this.showAttemptsLeft = error.response.data.show_attempts_left;
                                 }
 
                                 this.resetCode();
@@ -184,7 +194,7 @@
                 this.counter = seconds;
 
                 window.setInterval(() => {
-                    if(this.counter == 0) {
+                    if(this.counter == 1) {
                         this.showThrottle = false;
                         clearInterval(window.setInterval());
                     }
@@ -233,6 +243,9 @@
             registerKeys() {
                 document.addEventListener("keydown", (e) => {
                     switch (e.keyCode) {
+                        case 48:
+                            this.addNumber(0);
+                            break;
                         case 49:
                             this.addNumber(1);
                             break;
