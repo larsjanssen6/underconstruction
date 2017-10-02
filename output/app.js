@@ -1754,14 +1754,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['title', 'backButton', 'redirectUrl'],
+
     data: function data() {
         return {
             code: [],
             position: 0,
             wrongCode: false,
             success: false,
-            showThrottle: false,
-            showAttemptsLeft: false,
+            seconds_message: false,
+            attempts_left: false,
             counter: 0
         };
     },
@@ -1780,26 +1782,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addNumber: function addNumber(number) {
             var _this = this;
 
-            if (!this.showThrottle) {
+            if (!this.seconds_message) {
                 this.setNumber(number);
 
                 if (this.codeIsComplete()) {
                     axios.post("/under/check", { "code": this.code.join("") }).then(function () {
                         _this.success = true;
-                        window.location.href = '/';
+                        window.location.href = _this.redirectUrl;
                     }).catch(function (error) {
                         _this.wrongCode = true;
-                        _this.showThrottle = false;
                         setTimeout(function () {
                             return _this.wrongCode = false;
                         }, 5000);
 
                         if (_this.tooManyAttempts(error)) {
-                            _this.countDown(error.response.data.seconds);
-                            _this.showThrottle = true;
-                            _this.showAttemptsLeft = false;
+                            _this.seconds_message = error.response.data.seconds_message;
+                            _this.attempts_left = false;
                         } else {
-                            _this.showAttemptsLeft = error.response.data.show_attempts_left;
+                            _this.attempts_left = error.response.data.attempts_left;
                         }
 
                         _this.resetCode();
@@ -1820,7 +1820,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             window.setInterval(function () {
                 if (_this2.counter == 1) {
-                    _this2.showThrottle = false;
+                    _this2.show_attempts_left = false;
                     clearInterval(window.setInterval());
                 }
 
@@ -3509,23 +3509,12 @@ var render = function() {
         _vm._v("\n        " + _vm._s(_vm.title) + "\n    ")
       ]),
       _vm._v(" "),
-      _vm.showAttemptsLeft != false
-        ? _c("div", [
-            _c("p", [
-              _vm._v("Attempts left: "),
-              _c("strong", [_vm._v(_vm._s(_vm.showAttemptsLeft) + ".")])
-            ])
-          ])
+      _vm.attempts_left != false
+        ? _c("div", [_c("p", [_vm._v(_vm._s(_vm.attempts_left))])])
         : _vm._e(),
       _vm._v(" "),
-      _vm.showThrottle
-        ? _c("div", [
-            _c("p", [
-              _vm._v("Too many attempts please try again in "),
-              _c("strong", [_vm._v(_vm._s(_vm.counter))]),
-              _vm._v(" seconds.")
-            ])
-          ])
+      _vm.seconds_message != false
+        ? _c("div", [_c("p", [_vm._v(_vm._s(_vm.seconds_message))])])
         : _vm._e(),
       _vm._v(" "),
       _c(
@@ -3719,7 +3708,11 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._m(10)]
+                    [
+                      _c("div", { staticClass: "flex-center full-height" }, [
+                        _c("h3", [_vm._v(_vm._s(_vm.backButton))])
+                      ])
+                    ]
                   )
                 ])
               ])
@@ -3809,14 +3802,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "flex-center full-height" }, [
       _c("h3", [_vm._v("0")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex-center full-height" }, [
-      _c("h3", [_vm._v("back")])
     ])
   }
 ]

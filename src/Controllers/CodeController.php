@@ -2,9 +2,11 @@
 
 namespace LarsJanssen\UnderConstruction\Controllers;
 
+use Exception;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use LarsJanssen\UnderConstruction\Facades\TransFormer;
 use LarsJanssen\UnderConstruction\Throttle;
 use Illuminate\Config\Repository;
 
@@ -49,22 +51,25 @@ class CodeController extends Controller
      */
     public function index()
     {
-        return view('views::index');
+        return view('views::index')->with([
+            'title' => $this->config['title'],
+            'backButton' => $this->config['back-button'],
+            'redirectUrl' => $this->config['redirect-url'],
+        ]);
     }
-    
+
     /**
      * Check if the given code is correct,
      * then return the proper response.
      *
      * @param Request $request
      * @param Hasher $hasher
-     * @return \Illuminate\Contracts\Hashing\Hasher
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws Exception
      */
     public function check(Request $request, Hasher $hasher)
     {
-        $hash = file_get_contents(__DIR__ . '/../Commands/hash.txt');
-
-        if ($hasher->check($request->code, $hash)) {
+        if ($hasher->check($request->code, $this->getHash())) {
             session(['can_visit' => true]);
 
             return response([
@@ -76,16 +81,14 @@ class CodeController extends Controller
 
         if ($this->hasTooManyLoginAttempts($request) && $this->throttleIsActive()) {
             return response([
-                "status" => 'too many attempts',
-                'seconds' => $this->getBlockedSeconds($request),
                 "too_many_attemps" => true,
+                'seconds_message' => TransFormer::start($this->getBlockedSeconds($request), $this->config['seconds_message'])
             ], 401);
         }
 
         return response([
-            "status" => "wrong code",
             "too_many_attemps" => false,
-            'show_attempts_left' => $this->showAttempts($request)
+            'attempts_left' => $this->showAttempts($request)
         ], 401);
     }
 
@@ -107,6 +110,27 @@ class CodeController extends Controller
      */
     private function showAttempts(Request $request)
     {
-        return $this->config['show_attempts_left'] ? $this->retriesLeft($request) : false;
+        if($this->config['show_attempts_left'] && $this->config['throttle']) {
+            return TransFormer::start($this->retriesLeft($request), $this->config['attempts_message']);
+        }
+
+        return false;
+    }
+
+    /**
+     * Get the hash from .txt file.
+     *
+     * @return bool|string
+     * @throws Exception
+     */
+    private function getHash()
+    {
+        if(file_exists(__DIR__ . '/../Commands/hash.txt')) {
+            return file_get_contents(__DIR__ . '/../Commands/hash.txt');
+        }
+
+        else {
+            throw new Exception('Please make sure you have set a code with php artisan code:set ****');
+        }
     }
 }

@@ -1,33 +1,71 @@
 <?php
 
 return [
+
     /**
      * Activate under construction mode.
      */
+
     'enabled' => env('UNDER_CONSTRUCTION_ENABLED', true),
 
     /**
      * Under construction title.
      */
-    'title' => 'Under c',
+
+    'title' => 'Under Construction',
+
+    /**
+     * Back button translation.
+     */
+
+    'back-button' => 'back',
+
+    /**
+     * Redirect url after a successful login.
+     */
+
+    'redirect-url' => '/',
 
     /**
      * Enable throttle (max login attempts).
      */
+
     'throttle' => true,
 
-    /**
-     * If throttle is enabled (true) set the maximum number of attempts to allow.
-     */
-    'max_attempts' => 3,
+            /*
+            |--------------------------------------------------------------------------
+            | Throttle settings (only when throttle is true)
+            |--------------------------------------------------------------------------
+            |
 
-    /**
-     * If throttle is enabled (true) show attempts left.
-     */
-    'show_attempts_left' => true,
+            */
+            /**
+             * Set the maximum number of attempts to allow.
+             */
 
-    /**
-     * If throttle is enabled (true) set the number of minutes to disable login.
-     */
-    'decay_minutes' => 5
+            'max_attempts' => 3,
+
+            /**
+             * Show attempts left.
+             */
+
+            'show_attempts_left' => true,
+
+            /**
+             * Attempts left message.
+             */
+
+            'attempts_message' => 'Attempts left: %i',
+
+            /**
+             * Too many attempts message.
+             */
+
+            'seconds_message' => 'Too many attempts please try again in %i seconds.',
+
+            /**
+             * Set the number of minutes to disable login.
+             */
+
+            'decay_minutes' => 5
 ];

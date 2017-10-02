@@ -4,12 +4,12 @@
             {{ title }}
         </div>
 
-        <div v-if="showAttemptsLeft != false">
-            <p>Attempts left: <strong>{{ showAttemptsLeft }}.</strong></p>
+        <div v-if="attempts_left != false">
+            <p>{{ attempts_left }}</p>
         </div>
 
-        <div v-if="showThrottle">
-            <p>Too many attempts please try again in <strong>{{ counter }}</strong> seconds.</p>
+        <div v-if="seconds_message != false">
+            <p>{{ seconds_message }}</p>
         </div>
 
         <div class="panel flex flex-column" :class="{ wrong_code: wrongCode, success_code: success }" v-cloak>
@@ -119,7 +119,7 @@
 
                             <div class="flex-two number" @click="back()">
                                 <div class="flex-center full-height">
-                                    <h3>back</h3>
+                                    <h3>{{ backButton }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -132,14 +132,16 @@
 
 <script>
     export default {
+        props: ['title', 'backButton', 'redirectUrl'],
+
         data() {
             return {
                 code: [],
                 position: 0,
                 wrongCode: false,
                 success: false,
-                showThrottle: false,
-                showAttemptsLeft: false,
+                seconds_message: false,
+                attempts_left: false,
                 counter: 0
             }
         },
@@ -156,28 +158,26 @@
              */
 
             addNumber(number) {
-                if(!this.showThrottle) {
+                if(!this.seconds_message) {
                     this.setNumber(number);
 
                     if(this.codeIsComplete()) {
                         axios.post("/under/check", { "code": this.code.join("") })
                             .then(() => {
                                 this.success = true;
-                                window.location.href = '/';
+                                window.location.href = this.redirectUrl;
                             })
                             .catch((error) => {
                                 this.wrongCode = true;
-                                this.showThrottle = false;
                                 setTimeout(() => this.wrongCode = false, 5000);
 
                                 if(this.tooManyAttempts(error)) {
-                                    this.countDown(error.response.data.seconds);
-                                    this.showThrottle = true;
-                                    this.showAttemptsLeft = false;
+                                    this.seconds_message = error.response.data.seconds_message;
+                                    this.attempts_left = false;
                                 }
 
                                 else {
-                                    this.showAttemptsLeft = error.response.data.show_attempts_left;
+                                    this.attempts_left = error.response.data.attempts_left;
                                 }
 
                                 this.resetCode();
@@ -195,7 +195,7 @@
 
                 window.setInterval(() => {
                     if(this.counter == 1) {
-                        this.showThrottle = false;
+                        this.show_attempts_left = false;
                         clearInterval(window.setInterval());
                     }
 
