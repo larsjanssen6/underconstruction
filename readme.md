@@ -101,4 +101,4 @@ follow me on <a href="https://twitter.com/larsjansse">twitter</a>.
 
 ## License
 
-The MIT License (MIT). Please see # for more information.
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
