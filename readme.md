@@ -84,7 +84,7 @@ composer test
 
 ## Contributing
 
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+I would love to hear your ideas to improve my code style and conventions. Feel free to contribute.
 
 ## Security
 
