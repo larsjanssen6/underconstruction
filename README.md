@@ -2,6 +2,7 @@
 
 [![StyleCI](https://styleci.io/repos/104500164/shield)](https://styleci.io/repos/104500164)
 
+[![Quality Score](https://img.shields.io/scrutinizer/g/larsjanssen6/laravel-demo-mode.svg?style=flat-square)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction)
 
 This Laravel packages makes it possible to set your website in under construction mode. Only users with a correct 4 digits code have access to your site. You can set the code with this custom artisan command:
 
