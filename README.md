@@ -30,14 +30,14 @@ Then the  ```service provider``` must be installed.
 ];
 ```
 
-The ``` ``` middleware must be registered in the kernel:
+The ```\LarsJanssen\UnderConstruction\UnderConstruction::class``` middleware must be registered in the kernel:
 
-```
+```php
 //app/Http/Kernel.php
 
 protected $routeMiddleware = [
   ...
-  'demoMode' => \Spatie\DemoMode\DemoMode::class,
+  'under-construction' => \LarsJanssen\UnderConstruction\UnderConstruction::class,
 ];
 ```
 
