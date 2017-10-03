@@ -4,7 +4,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/build.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/?branch=master)
 
-This Laravel packages makes it possible to set your website in under construction mode. Only users with a correct 4 digits code have access to your site. You can set the code with this custom artisan command:
+This Laravel packages makes it possible to set your website in under construction mode. Only users with a correct 4 digits code have access to your site. This package could for example be useful if you want to show your website to a client. You can set the code with this custom artisan command:
 
 ``` bash
 php artisan code:set "yourcode"
