@@ -14,7 +14,7 @@ class AssetController extends Controller
      */
     public function js()
     {
-        $content = file_get_contents(__DIR__ . '/../../output/app.js');
+        $content = file_get_contents(__DIR__.'/../../output/app.js');
 
         $response = new Response(
             $content, 200, [

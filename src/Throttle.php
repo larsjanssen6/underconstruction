@@ -2,15 +2,16 @@
 
 namespace LarsJanssen\UnderConstruction;
 
-use Illuminate\Http\Request;
 use Illuminate\Cache\RateLimiter;
+use Illuminate\Http\Request;
 
 trait Throttle
 {
     /**
      * Get the number of attempts left.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return bool
      */
     protected function retriesLeft(Request $request)
@@ -21,7 +22,8 @@ trait Throttle
     /**
      * Determine if the user has too many failed login attempts.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return bool
      */
     protected function hasTooManyLoginAttempts(Request $request)
@@ -34,7 +36,8 @@ trait Throttle
     /**
      * Increment the login attempts for the user.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return void
      */
     protected function incrementLoginAttempts(Request $request)
@@ -47,9 +50,11 @@ trait Throttle
     /**
      * Redirect the user after determining they are locked out.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return int
+     * @param \Illuminate\Http\Request $request
+     *
      * @throws \Illuminate\Validation\ValidationException
+     *
+     * @return int
      */
     protected function getBlockedSeconds(Request $request)
     {
@@ -61,7 +66,8 @@ trait Throttle
     /**
      * Get the throttle key for the given request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return string
      */
     protected function throttleKey(Request $request)

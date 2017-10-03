@@ -12,10 +12,10 @@ class UnderConstructionServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/under-construction.php' => config_path('under-construction.php'),
+            __DIR__.'/../config/under-construction.php' => config_path('under-construction.php'),
         ], 'config');
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'views');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'views');
     }
 
     /**
@@ -24,33 +24,33 @@ class UnderConstructionServiceProvider extends ServiceProvider
     public function register()
     {
         $this->commands('LarsJanssen\UnderConstruction\Commands\SetCodeCommand');
-        $this->mergeConfigFrom(__DIR__ . '/../config/under-construction.php', 'under-construction');
+        $this->mergeConfigFrom(__DIR__.'/../config/under-construction.php', 'under-construction');
 
         $this->app->bind('TransFormer', function ($app) {
             return new TransFormer();
         });
 
         $routeConfig = [
-            'namespace' => 'LarsJanssen\UnderConstruction\Controllers',
-            'prefix' => 'under',
+            'namespace'  => 'LarsJanssen\UnderConstruction\Controllers',
+            'prefix'     => 'under',
             'middleware' => [
                 'web',
             ],
         ];
-        $this->getRouter()->group($routeConfig, function($router) {
+        $this->getRouter()->group($routeConfig, function ($router) {
             $router->post('check', [
                 'uses' => 'CodeController@check',
-                'as' => 'underconstruction.check',
+                'as'   => 'underconstruction.check',
             ]);
 
             $router->get('construction', [
                 'uses' => 'CodeController@index',
-                'as' => 'underconstruction.index',
+                'as'   => 'underconstruction.index',
             ]);
 
             $router->get('js', [
                 'uses' => 'AssetController@js',
-                'as' => 'underconstruction.js',
+                'as'   => 'underconstruction.js',
             ]);
         });
     }

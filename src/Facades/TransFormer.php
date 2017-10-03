@@ -11,5 +11,8 @@ class TransFormer extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'TransFormer'; }
+    protected static function getFacadeAccessor()
+    {
+        return 'TransFormer';
+    }
 }
