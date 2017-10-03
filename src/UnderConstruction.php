@@ -18,7 +18,7 @@ class UnderConstruction
 
     public function handle($request, Closure $next)
     {
-        if (! $this->config['enabled']) {
+        if (!$this->config['enabled']) {
             return $next($request);
         }
 

@@ -8,7 +8,7 @@ class TransFormer
 {
     public function start($replace, $message)
     {
-        if (strpos($message, '%i') === FALSE) {
+        if (strpos($message, '%i') === false) {
             throw new Exception('Make sure %i is in the sense');
         }
 
