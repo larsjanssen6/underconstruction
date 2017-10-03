@@ -87,7 +87,7 @@ class CodeController extends Controller
         if ($this->hasTooManyLoginAttempts($request) && $this->throttleIsActive()) {
             return response([
                 'too_many_attemps' => true,
-                'seconds_message'  => TransFormer::start($this->getBlockedSeconds($request), $this->config['seconds_message']),
+                'seconds_message'  => TransFormer::transform($this->getBlockedSeconds($request), $this->config['seconds_message']),
             ], 401);
         }
 
@@ -117,7 +117,7 @@ class CodeController extends Controller
     private function showAttempts(Request $request)
     {
         if ($this->config['show_attempts_left'] && $this->config['throttle']) {
-            return TransFormer::start($this->retriesLeft($request), $this->config['attempts_message']);
+            return TransFormer::transform($this->retriesLeft($request), $this->config['attempts_message']);
         }
 
         return false;
