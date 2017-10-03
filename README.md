@@ -1,12 +1,58 @@
-# Laravel 5.5 Under Construction <img width="45" alt="schermafbeelding 2017-09-27 om 23 08 12" src="https://user-images.githubusercontent.com/7254997/30937972-c9632d04-a3d8-11e7-87f3-c44ce2b86d24.png">
+# Laravel Under Construction <img width="45" alt="schermafbeelding 2017-09-27 om 23 08 12" src="https://user-images.githubusercontent.com/7254997/30937972-c9632d04-a3d8-11e7-87f3-c44ce2b86d24.png">
 
-This Laravel packages makes it possible to set your website in under construction mode. Only users with a correct 4 digits code have access to your site. You can set the code with this custom artisan command:
+[![StyleCI](https://styleci.io/repos/104500164/shield)](https://styleci.io/repos/104500164)
+[![Build Status](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/build.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/?branch=master)
 
-``` bash
-php artisan code:set "yourcode"
-```
+This Laravel packages makes it possible to set your website in under construction mode. Only users with a correct 4 digits code have access to your site. This package could for example be useful if you want to show your website to a specific client. Everything works out of the box, and it's fully customizable.
 
 <img width="850" alt="underconstruction" src="https://user-images.githubusercontent.com/7254997/30869205-d96d9962-a2e0-11e7-9044-0a7ff708e6c3.png">
+
+## Installation
+
+Begin by installing this package through Composer.
+
+```bash
+composer require larsjanssen6/underconstruction
+```
+
+Then the  ```service provider``` must be installed.
+
+> Laravel 5.5+ users: this step may be skipped, as we can auto-register the package with the framework.
+
+```php
+
+// config/app.php
+
+'providers' => [
+    '...',
+    'LarsJanssen\UnderConstruction\UnderConstructionServiceProvider'
+];
+```
+
+The ```\LarsJanssen\UnderConstruction\UnderConstruction::class``` middleware must be registered in the kernel:
+
+```php
+//app/Http/Kernel.php
+
+protected $routeMiddleware = [
+  ...
+  'under-construction' => \LarsJanssen\UnderConstruction\UnderConstruction::class,
+];
+```
+
+### Defaults
+
+Publish the default configuration file.
+
+```bash
+php artisan vendor:publish
+
+// Or...
+
+php artisan vendor:publish --provider="LarsJanssen\UnderConstruction\UnderConstructionServiceProvider"
+```
+
 
 This package is fully customizable this is the content of the published config file `under-construction.php`:
 
@@ -70,6 +116,25 @@ return [
              */
             'decay_minutes' => 5
 ];
+```
+
+## Usage
+
+You'll have to set a 4 digit code. You can do that by running this custom
+artisan command (in this example code ```1234``` is set obviously you can set another code).
+
+```bash
+php artisan code:set 1234
+```
+
+You can set routes in under construction mode by using `under-construction`-middleware on them.
+
+```php
+Route::group(['middleware' => 'under-construction'], function () {
+    Route::get('/live-site', function() {
+        echo 'content!';
+    });
+});
 ```
 
 ## Changelog
