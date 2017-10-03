@@ -12,7 +12,7 @@
             <p>{{ seconds_message }}</p>
         </div>
 
-        <div class="panel flex flex-column" :class="{ wrong_code: wrongCode, success_code: success }" v-cloak>
+        <div class="panel flex flex-column" :class="{ wrong_code: wrongCode, success_code: success }">
             <div class="flex-one">
                 <div class="flex full-height">
                     <div class="flex-one number">
@@ -142,7 +142,7 @@
                 success: false,
                 seconds_message: false,
                 attempts_left: false,
-                counter: 0
+                seconds: 0
             }
         },
 
@@ -172,8 +172,7 @@
                                 setTimeout(() => this.wrongCode = false, 5000);
 
                                 if(this.tooManyAttempts(error)) {
-                                    this.seconds_message = error.response.data.seconds_message;
-                                    this.attempts_left = false;
+                                    this.countDown(error.response.data.seconds_message);
                                 }
 
                                 else {
@@ -187,19 +186,27 @@
             },
 
             /**
-             * Countdown from given throttle seconds.
+             * Extract the seconds out of the string. Then
+             * start a timer and decrement it every second.
              */
 
-            countDown(seconds) {
-                this.counter = seconds;
+            countDown(message) {
+                this.attempts_left = false;
+                this.seconds_message = message;
 
-                window.setInterval(() => {
-                    if(this.counter == 1) {
-                        this.show_attempts_left = false;
-                        clearInterval(window.setInterval());
+                let timer = setInterval(() => {
+                    if(this.seconds == 1) {
+                        this.seconds_message = false;
+                        this.seconds = 0;
+                        clearInterval(timer);
                     }
 
-                    this.counter--;
+                    else {
+                        this.seconds_message = this.seconds_message.replace(/\d+/g, (match) => {
+                            this.seconds = parseInt(match) - 1;
+                            return this.seconds;
+                        });
+                    }
                 }, 1000);
             },
 
@@ -291,9 +298,6 @@
     $box-shadow: 0 2px 3px 0
     $shadow-color: rgba(0,0,0,.16)
     $mobile-break-point: 750px
-
-    [v-cloak]
-        display: none
 
     .body_warning
         color: $warning
