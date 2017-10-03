@@ -69,6 +69,8 @@ class CodeController extends Controller
      */
     public function check(Request $request, Hasher $hasher)
     {
+        $request->validate(['code' => 'required|numeric']);
+
         if ($hasher->check($request->code, $this->getHash())) {
             session(['can_visit' => true]);
 
