@@ -30,6 +30,7 @@ class SetCodeCommand extends Command
 
     /**
      * Create a new command instance.
+     *
      * @param Hasher $hasher
      */
     public function __construct(Hasher $hasher)
@@ -47,19 +48,19 @@ class SetCodeCommand extends Command
     {
         $code = $this->argument('code');
 
-        if($this->validate($code)) {
-            file_put_contents(__DIR__ . '/hash.txt', $this->hasher->make($code));
+        if ($this->validate($code)) {
+            file_put_contents(__DIR__.'/hash.txt', $this->hasher->make($code));
             $this->info(sprintf('Code: "%s" is set successfully.', $code));
-        }
-
-        else {
+        } else {
             $this->error('Wrong input. Code should contain 4 numbers.');
         }
     }
 
     /**
      * Check if given code is valid.
+     *
      * @param $code
+     *
      * @return bool
      */
     public function validate($code) : bool
