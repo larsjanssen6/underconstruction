@@ -118,6 +118,25 @@ return [
 ];
 ```
 
+## Usage
+
+You'll have to set a 4 digit code. You can do that by running this custom
+artisan command (in this example code ```1234``` is set obviously you can set another code).
+
+```bash
+php artisan code:set 1234
+```
+
+You can set routes in under construction mode by using `under-construction`-middleware on them.
+
+```php
+Route::group(['middleware' => 'under-construction'], function () {
+    Route::get('/live-site', function() {
+        echo 'content!';
+    });
+});
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
