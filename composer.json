@@ -5,7 +5,7 @@
     "authors": [
         {
             "name": "Lars Janssen",
-            "email": "larsjanssen64@gmail.com",
+            "email": "mail@larsjanssen.net",
             "role": "Developer"
         }
     ],
@@ -13,13 +13,23 @@
         "php" : "^7.0",
         "illuminate/support": "~5.5.0"
     },
+    "require-dev": {
+        "orchestra/testbench": "~3.5.0",
+        "phpunit/phpunit": "^6.3"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LarsJanssen\\UnderConstruction\\Test\\": "tests"
+        }
+    },
     "autoload": {
         "psr-4": {
             "LarsJanssen\\UnderConstruction\\": "src/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
     "extra": {
         "laravel": {
             "providers": [
