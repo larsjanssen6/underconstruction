@@ -4,7 +4,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/build.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/?branch=master)
 
-This Laravel packages makes it possible to set your website in "Under Construction" mode. Only users with the correct 4 digits code can have access to your site. This package could be useful for you to show your website to a specific client. Everything works out of the box, and it's fully customizable.
+This Laravel package makes it possible for you to set your website in "Under Construction" mode. Only users with the correct 4 digits code can access your site. This package can be useful for you to show your website to a specific client. Everything works out of the box, and it's fully customizable.
 
 <img width="850" alt="underconstruction" src="https://user-images.githubusercontent.com/7254997/30869205-d96d9962-a2e0-11e7-9044-0a7ff708e6c3.png">
 
