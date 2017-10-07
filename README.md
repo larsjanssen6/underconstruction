@@ -4,7 +4,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/build.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/?branch=master)
 
-This Laravel packages makes it possible to set your website in under construction mode. Only users with a correct 4 digits code have access to your site. This package could for example be useful if you want to show your website to a specific client. Everything works out of the box, and it's fully customizable.
+This Laravel packages makes it possible to set your website in "Under Construction" mode. Only users with the correct 4 digits code can have access to your site. This package could be useful for you to show your website to a specific client. Everything works out of the box, and it's fully customizable.
 
 <img width="850" alt="underconstruction" src="https://user-images.githubusercontent.com/7254997/30869205-d96d9962-a2e0-11e7-9044-0a7ff708e6c3.png">
 
@@ -54,7 +54,7 @@ php artisan vendor:publish --provider="LarsJanssen\UnderConstruction\UnderConstr
 ```
 
 
-This package is fully customizable this is the content of the published config file `under-construction.php`:
+This package is fully customizable. This is the content of the published config file `under-construction.php`:
 
 ```php
 return [
@@ -121,13 +121,13 @@ return [
 ## Usage
 
 You'll have to set a 4 digit code. You can do that by running this custom
-artisan command (in this example code ```1234``` is set obviously you can set another code).
+artisan command (in this example the code is ```1234``` ,you can obviously set another code).
 
 ```bash
 php artisan code:set 1234
 ```
 
-You can set routes in under construction mode by using `under-construction`-middleware on them.
+You can set routes to be in "Under Construction" mode by using the `under-construction`-middleware on them.
 
 ```php
 Route::group(['middleware' => 'under-construction'], function () {
@@ -139,7 +139,7 @@ Route::group(['middleware' => 'under-construction'], function () {
 
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Testing
 
@@ -149,11 +149,11 @@ composer test
 
 ## Contributing
 
-I would love to hear your ideas to improve my code style and conventions. Feel free to contribute.
+I would love to hear your ideas to improve my codeing style and conventions. Feel free to contribute.
 
 ## Security
 
-If you discover any security related issues, please email mail@larsjanssen.net. You could also make an issue. 
+If you discover any security related issues, please email mail@larsjanssen.net. You can also make an issue. 
 
 ## Credits
 
@@ -161,7 +161,7 @@ If you discover any security related issues, please email mail@larsjanssen.net. 
 - [All Contributors](../../contributors)
 
 ## About me
-I'm Lars Janssen from The Netherlands and like working on web projects. You could
+I'm Lars Janssen from The Netherlands and like to work on web projects. You can
 follow me on <a href="https://twitter.com/larsjansse">twitter</a>.
 
 ## License
