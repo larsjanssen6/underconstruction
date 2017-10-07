@@ -1764,7 +1764,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             success: false,
             seconds_message: false,
             attempts_left: false,
-            counter: 0
+            seconds: 0
         };
     },
     mounted: function mounted() {
@@ -1796,8 +1796,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         }, 5000);
 
                         if (_this.tooManyAttempts(error)) {
-                            _this.seconds_message = error.response.data.seconds_message;
-                            _this.attempts_left = false;
+                            _this.countDown(error.response.data.seconds_message);
                         } else {
                             _this.attempts_left = error.response.data.attempts_left;
                         }
@@ -1810,21 +1809,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
         /**
-         * Countdown from given throttle seconds.
+         * Extract the seconds out of the string. Then
+         * start a timer and decrement it every second.
          */
 
-        countDown: function countDown(seconds) {
+        countDown: function countDown(message) {
             var _this2 = this;
 
-            this.counter = seconds;
+            this.attempts_left = false;
+            this.seconds_message = message;
 
-            window.setInterval(function () {
-                if (_this2.counter == 1) {
-                    _this2.show_attempts_left = false;
-                    clearInterval(window.setInterval());
+            var timer = setInterval(function () {
+                if (_this2.seconds == 1) {
+                    _this2.seconds_message = false;
+                    _this2.seconds = 0;
+                    clearInterval(timer);
+                } else {
+                    _this2.seconds_message = _this2.seconds_message.replace(/\d+/g, function (match) {
+                        _this2.seconds = parseInt(match) - 1;
+                        return _this2.seconds;
+                    });
                 }
-
-                _this2.counter--;
             }, 1000);
         },
         tooManyAttempts: function tooManyAttempts(error) {
@@ -1919,7 +1924,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n[v-cloak][data-v-5f55aafb] {\n  display: none;\n}\n.body_warning[data-v-5f55aafb] {\n  color: #e74c3c;\n}\n.body_success[data-v-5f55aafb] {\n  color: #27ae60;\n}\n.flex[data-v-5f55aafb], .flex-center[data-v-5f55aafb] {\n  display: flex;\n}\n.flex-one[data-v-5f55aafb] {\n  flex: 1;\n}\n.flex-two[data-v-5f55aafb] {\n  flex: 1;\n}\n.flex-three[data-v-5f55aafb] {\n  flex: 3;\n}\n.full-height-vh[data-v-5f55aafb] {\n  height: 100vh;\n}\n.full-height[data-v-5f55aafb] {\n  height: 100%;\n}\n.flex-center[data-v-5f55aafb] {\n  align-items: center;\n  justify-content: center;\n}\n.flex-column[data-v-5f55aafb] {\n  flex-direction: column;\n}\n.panel[data-v-5f55aafb] {\n  width: 300px;\n  height: 400px;\n  background: #F8F8FA;\n  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16);\n  border-radius: 6px;\n}\n.wrong_code[data-v-5f55aafb] {\n  box-shadow: 0 2px 3px 0 #e74c3c;\n}\n.success_code[data-v-5f55aafb] {\n  box-shadow: 0 2px 3px 0 #27ae60;\n}\n.number[data-v-5f55aafb] {\n  margin: 10px;\n  border-bottom: 1px solid #DCDCDE;\n  cursor: pointer;\n}\n.number div h3[data-v-5f55aafb] {\n    font-size: 15px;\n    font-weight: 900;\n}\n.number[data-v-5f55aafb]:hover {\n    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16);\n}\n.title[data-v-5f55aafb] {\n  font-size: 84px;\n  margin-bottom: 40px;\n}\n@media only screen and (max-width: 750px) {\n.title[data-v-5f55aafb] {\n    display: none;\n}\n}\n", ""]);
+exports.push([module.i, "\n.body_warning[data-v-5f55aafb] {\n  color: #e74c3c;\n}\n.body_success[data-v-5f55aafb] {\n  color: #27ae60;\n}\n.flex[data-v-5f55aafb], .flex-center[data-v-5f55aafb] {\n  display: flex;\n}\n.flex-one[data-v-5f55aafb] {\n  flex: 1;\n}\n.flex-two[data-v-5f55aafb] {\n  flex: 1;\n}\n.flex-three[data-v-5f55aafb] {\n  flex: 3;\n}\n.full-height-vh[data-v-5f55aafb] {\n  height: 100vh;\n}\n.full-height[data-v-5f55aafb] {\n  height: 100%;\n}\n.flex-center[data-v-5f55aafb] {\n  align-items: center;\n  justify-content: center;\n}\n.flex-column[data-v-5f55aafb] {\n  flex-direction: column;\n}\n.panel[data-v-5f55aafb] {\n  width: 300px;\n  height: 400px;\n  background: #F8F8FA;\n  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16);\n  border-radius: 6px;\n}\n.wrong_code[data-v-5f55aafb] {\n  box-shadow: 0 2px 3px 0 #e74c3c;\n}\n.success_code[data-v-5f55aafb] {\n  box-shadow: 0 2px 3px 0 #27ae60;\n}\n.number[data-v-5f55aafb] {\n  margin: 10px;\n  border-bottom: 1px solid #DCDCDE;\n  cursor: pointer;\n}\n.number div h3[data-v-5f55aafb] {\n    font-size: 15px;\n    font-weight: 900;\n}\n.number[data-v-5f55aafb]:hover {\n    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.16);\n}\n.title[data-v-5f55aafb] {\n  font-size: 84px;\n  margin-bottom: 40px;\n}\n@media only screen and (max-width: 750px) {\n.title[data-v-5f55aafb] {\n    display: none;\n}\n}\n", ""]);
 
 // exports
 
