@@ -26,7 +26,7 @@ class UnderConstructionServiceProvider extends ServiceProvider
         $this->commands('LarsJanssen\UnderConstruction\Commands\SetCodeCommand');
         $this->mergeConfigFrom(__DIR__.'/../config/under-construction.php', 'under-construction');
 
-        $this->app->bind('TransFormer', function ($app) {
+        $this->app->bind('TransFormer', function($app) {
             return new TransFormer();
         });
 
@@ -38,7 +38,7 @@ class UnderConstructionServiceProvider extends ServiceProvider
             ],
         ];
 
-        $this->getRouter()->group($routeConfig, function ($router) {
+        $this->getRouter()->group($routeConfig, function($router) {
             $router->post('check', [
                 'uses' => 'CodeController@check',
                 'as'   => 'underconstruction.check',
