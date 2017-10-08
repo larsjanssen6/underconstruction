@@ -8,6 +8,11 @@ return [
     'enabled' => env('UNDER_CONSTRUCTION_ENABLED', true),
 
     /*
+     * Hash for the current pin code
+     */
+    'hash' => env('UNDER_CONSTRUCTION_HASH', null),
+
+    /*
      * Under construction title.
      */
     'title' => 'Under Construction',

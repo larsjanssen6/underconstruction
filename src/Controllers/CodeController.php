@@ -132,8 +132,8 @@ class CodeController extends Controller
      */
     private function getHash()
     {
-        if (file_exists(__DIR__.'/../Commands/hash.txt')) {
-            return file_get_contents(__DIR__.'/../Commands/hash.txt');
+        if (isset($this->config['hash']) && $this->config['hash']) {
+            return $this->config['hash'];
         } else {
             throw new Exception('Please make sure you have set a code with php artisan code:set ****');
         }
