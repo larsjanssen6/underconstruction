@@ -15,27 +15,9 @@
         <div class="panel flex flex-column" :class="{ wrong_code: wrongCode, success_code: success }">
             <div class="flex-one">
                 <div class="flex full-height">
-                    <div class="flex-one number">
+                    <div class="flex-one number" v-for="number in 4">
                         <div class="flex-center full-height">
-                            <h3>{{ code[0] }}</h3>
-                        </div>
-                    </div>
-
-                    <div class="flex-one number">
-                        <div class="flex-center full-height">
-                            <h3>{{ code[1] }}</h3>
-                        </div>
-                    </div>
-
-                    <div class="flex-one number">
-                        <div class="flex-center full-height">
-                            <h3>{{ code[2] }}</h3>
-                        </div>
-                    </div>
-
-                    <div class="flex-one number">
-                        <div class="flex-center full-height">
-                            <h3>{{ code[3] }}</h3>
+                            <h3>{{ code[number - 1] }}</h3>
                         </div>
                     </div>
                 </div>
@@ -43,67 +25,11 @@
 
             <div class="flex-three">
                 <div class="flex flex-column full-height">
-                    <div class="flex-one">
+                    <div class="flex-one" v-for="row in 3">
                         <div class="flex full-height">
-                            <div class="flex-one number" @click="addNumber(7)">
+                            <div class="flex-one number" v-for="number in 3" @click="addNumber(getNumber(row, number))">
                                 <div class="flex-center full-height">
-                                    <h3>7</h3>
-                                </div>
-                            </div>
-
-                            <div class="flex-one number" @click="addNumber(8)">
-                                <div class="flex-center full-height">
-                                    <h3>8</h3>
-                                </div>
-                            </div>
-
-                            <div class="flex-one number" @click="addNumber(9)">
-                                <div class="flex-center full-height">
-                                    <h3>9</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex-one">
-                        <div class="flex full-height">
-                            <div class="flex-one number" @click="addNumber(4)">
-                                <div class="flex-center full-height">
-                                    <h3>4</h3>
-                                </div>
-                            </div>
-
-                            <div class="flex-one number" @click="addNumber(5)">
-                                <div class="flex-center full-height">
-                                    <h3>5</h3>
-                                </div>
-                            </div>
-
-                            <div class="flex-one number" @click="addNumber(6)">
-                                <div class="flex-center full-height">
-                                    <h3>6</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex-one">
-                        <div class="flex full-height">
-                            <div class="flex-one number" @click="addNumber(1)">
-                                <div class="flex-center full-height">
-                                    <h3>1</h3>
-                                </div>
-                            </div>
-
-                            <div class="flex-one number" @click="addNumber(2)">
-                                <div class="flex-center full-height">
-                                    <h3>2</h3>
-                                </div>
-                            </div>
-
-                            <div class="flex-one number" @click="addNumber(3)">
-                                <div class="flex-center full-height">
-                                    <h3>3</h3>
+                                    <h3>{{ getNumber(row, number) }}</h3>
                                 </div>
                             </div>
                         </div>
@@ -152,6 +78,10 @@
         },
 
         methods: {
+
+            getNumber(row, number) {
+              return number + (3 - row) * 3,
+            },
 
             /**
              * Add entered number to code array.
@@ -299,72 +229,72 @@ $box-shadow: 0 2px 3px 0
 $shadow-color: rgba(0,0,0,.16)
 $mobile-break-point: 750px
 
-.wrong_code 
+.wrong_code
   box-shadow: $box-shadow $warning
 
-.success_code 
+.success_code
   box-shadow: $box-shadow $success
 
-.body_warning 
+.body_warning
   color: $warning
 
-.body_success 
+.body_success
   color: $success
 
 
-.flex 
+.flex
   display: flex
 
-  &-one 
+  &-one
     flex: 1
 
-  &-two 
+  &-two
     flex: 1
 
-  &-three 
+  &-three
     flex: 3
 
-  &-center 
+  &-center
     @extend .flex
     align-items: center
     justify-content: center
 
-  &-column 
+  &-column
     flex-direction: column
 
-.full-height 
+.full-height
   height: 100%
 
-  &-vh 
+  &-vh
     height: 100vh
 
-.panel 
+.panel
   width: 300px
   height: 400px
   background: #F8F8FA
   box-shadow: $box-shadow $shadow-color
   border-radius: 6px
 
-.number 
+.number
   margin: 10px
   border-bottom: 1px solid #DCDCDE
   cursor: pointer
 
-  div 
-    h3 
+  div
+    h3
       font-size: 15px
       font-weight: 900
 
-  &:hover 
+  &:hover
     box-shadow: $box-shadow $shadow-color
 
 
-.title 
+.title
   font-size: 84px
   margin-bottom: 40px
 
-@media only screen and (max-width: $mobile-break-point) 
-  .title 
+@media only screen and (max-width: $mobile-break-point)
+  .title
     display: none
 
 </style>
