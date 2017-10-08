@@ -6,3 +6,4 @@ npm-debug.log
 composer.lock
 package-lock.json
 mix-manifest.json
+.DS_Store
