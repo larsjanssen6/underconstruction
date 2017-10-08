@@ -59,6 +59,7 @@
 <script>
     export default {
         props: ['title', 'backButton', 'redirectUrl'],
+
         data() {
             return {
                 code: [],
@@ -70,11 +71,17 @@
                 seconds: 0
             }
         },
+
         mounted() {
             this.registerKeys();
             this.resetCode();
         },
+
         methods: {
+
+            /**
+             * Calculate the number
+             */
             getNumber(row, number) {
                 return number + (3 - row) * 3;
             },
@@ -105,6 +112,7 @@
                     }
                 }
             },
+
             /**
              * Extract the seconds out of the string. Then
              * start a timer and decrement it every second.
@@ -126,19 +134,23 @@
                     }
                 }, 1000);
             },
+
             tooManyAttempts(error) {
                 return error.response.data.too_many_attemps;
             },
+
             back() {
                 if(this.position > 0) {
                     Vue.set(this.code, this.position -1, "*");
                     this.position--;
                 }
             },
+
             resetCode() {
                 this.code = ['*', '*', '*', '*'];
                 this.position = 0;
             },
+
             /**
              * Set number at the correct array position.
              */
@@ -146,12 +158,14 @@
                 Vue.set(this.code, this.position, number);
                 this.position++;
             },
+
             /**
              * Check if all numbers are entered.
              */
             codeIsComplete() {
                 return this.position == 4;
             },
+
             /**
              * Register all keyboard numbers.
              */
@@ -218,7 +232,6 @@ $mobile-break-point: 750px
 .body_success
   color: $success
 
-
 .flex
   display: flex
 
@@ -264,7 +277,6 @@ $mobile-break-point: 750px
 
   &:hover
     box-shadow: $box-shadow $shadow-color
-
 
 .title
   font-size: 84px
