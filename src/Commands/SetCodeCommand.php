@@ -62,12 +62,12 @@ class SetCodeCommand extends Command
         $envPath = $this->laravel->environmentFilePath();
         $envContent = file_get_contents($envPath);
         $regex = '/^UNDER_CONSTRUCTION_HASH=.*$/';
-        $newLine = 'UNDER_CONSTRUCTION_HASH=' . $hash;
+        $newLine = 'UNDER_CONSTRUCTION_HASH='.$hash;
 
         if (preg_match($regex, $envContent)) {
             $envContent = preg_replace_array($regex, $newLine, $envContent);
         } else {
-            $envContent .= "\n" . $newLine . "\n";
+            $envContent .= "\n".$newLine."\n";
         }
 
         file_put_contents($envPath, $envContent);
