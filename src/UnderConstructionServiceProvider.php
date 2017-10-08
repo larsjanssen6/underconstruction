@@ -37,6 +37,7 @@ class UnderConstructionServiceProvider extends ServiceProvider
                 'web',
             ],
         ];
+
         $this->getRouter()->group($routeConfig, function ($router) {
             $router->post('check', [
                 'uses' => 'CodeController@check',

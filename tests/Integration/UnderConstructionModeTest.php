@@ -16,14 +16,13 @@ class UnderConstructionModeTest extends TestCase
     public function it_only_redirects_users_if_under_construction_is_enabled()
     {
         $this->app['config']->set('under-construction.enabled', false);
-
         $this->assertCanVisitProductionSite();
     }
 
     /** @test */
     public function it_disables_login_for_one_minute_after_three_incorrect_attempts()
     {
-        $this->unsuccessfulLogin()
+        $this->post('/under/check', ['code' => 1235])
             ->assertStatus(401)
             ->assertJson([
                 'too_many_attemps' => false,
@@ -47,7 +46,7 @@ class UnderConstructionModeTest extends TestCase
 
     protected function unsuccessfulLogin()
     {
-        dd($this->post('/under/check', ['code' => 1235]));
+        return $this->post('/under/check', ['code' => 1235]);
     }
 
     protected function assertCanVisitProductionSite()
