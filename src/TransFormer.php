@@ -12,7 +12,7 @@ class TransFormer
             throw new Exception('Make sure %i in your config file is in the sense');
         }
 
-        if(1 === preg_match('~[0-9]~', $message)) {
+        if (1 === preg_match('~[0-9]~', $message)) {
             throw new Exception('Make sure the sense in your config file does not contain numbers');
         }
 
