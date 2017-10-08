@@ -26,7 +26,7 @@ class UnderConstructionModeTest extends TestCase
             ->assertStatus(401)
             ->assertJson([
                 'too_many_attemps' => false,
-                'attempts_left' => 2
+                'attempts_left' => 2,
             ]);
 //
 //        $this->unsuccessfulLogin()
