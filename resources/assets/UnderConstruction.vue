@@ -80,7 +80,7 @@
         methods: {
 
             getNumber(row, number) {
-              return number + (3 - row) * 3,
+              return number + (3 - row) * 3;
             },
 
             /**
