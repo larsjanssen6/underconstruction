@@ -22,17 +22,17 @@ class UnderConstructionModeTest extends TestCase
     /** @test */
     public function it_disables_login_for_one_minute_after_three_incorrect_attempts()
     {
-        $this->post('/under/check', ['code' => 1235])
+        $this->unsuccessfulLogin()
             ->assertStatus(401)
             ->assertJson([
-                'too_many_attemps' => false,
+                'too_many_attempts' => false,
                 'attempts_left' => 2,
             ]);
 //
 //        $this->unsuccessfulLogin()
 //            ->assertStatus(401)
 //            ->assertJson([
-//               'too_many_attemps' => false,
+//               'too_many_attempts' => false,
 //               'attempts_left' => 1
 //            ]);
 //
@@ -40,7 +40,7 @@ class UnderConstructionModeTest extends TestCase
 //            ->assertStatus(401)
 //            ->assertJson([
 //                'seconds_message' => 'Too many attempts please try again in seconds.',
-//                'too_many_attemps' => true
+//                'too_many_attempts' => true
 //            ]);
     }
 
