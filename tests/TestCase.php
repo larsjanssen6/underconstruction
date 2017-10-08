@@ -6,6 +6,7 @@ use Illuminate\Routing\RouteCollection;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use LarsJanssen\UnderConstruction\UnderConstruction;
+use LarsJanssen\UnderConstruction\UnderConstructionServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -18,7 +19,9 @@ class TestCase extends Orchestra
 
         $this->registerMiddleWare();
 
-        $this->setUpRoutes($this->app);
+        $this->setUpRoutes();
+
+        $this->registerServiceProvider();
 
         $this->config = $this->app['config']->get('demo-mode');
     }
@@ -31,6 +34,8 @@ class TestCase extends Orchestra
         $app['config']->set('app.key', '6rE9Nz59bGRbeMATftriyQjrpF7DcOQm');
 
         $app['config']->set('under-construction.enabled', true);
+
+        $app['config']->set('under-construction.hash', 9999);
     }
 
     protected function registerMiddleware()
@@ -38,10 +43,12 @@ class TestCase extends Orchestra
         $this->app[Router::class]->aliasMiddleware('under-construction', UnderConstruction::class);
     }
 
-    /**
-     * @param Application $app
-     */
-    protected function setUpRoutes($app)
+    protected function registerServiceProvider()
+    {
+        $this->app->register(UnderConstructionServiceProvider::class);
+    }
+
+    protected function setUpRoutes()
     {
         $this->app->get('router')->setRoutes(new RouteCollection());
 
