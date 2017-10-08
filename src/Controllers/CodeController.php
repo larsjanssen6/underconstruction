@@ -86,13 +86,13 @@ class CodeController extends Controller
 
         if ($this->hasTooManyLoginAttempts($request) && $this->throttleIsActive()) {
             return response([
-                'too_many_attemps' => true,
+                'too_many_attempts' => true,
                 'seconds_message'  => TransFormer::transform($this->getBlockedSeconds($request), $this->config['seconds_message']),
             ], 401);
         }
 
         return response([
-            'too_many_attemps' => false,
+            'too_many_attempts' => false,
             'attempts_left'    => $this->showAttempts($request),
         ], 401);
     }
@@ -132,8 +132,8 @@ class CodeController extends Controller
      */
     private function getHash()
     {
-        if (file_exists(__DIR__.'/../Commands/hash.txt')) {
-            return file_get_contents(__DIR__.'/../Commands/hash.txt');
+        if (isset($this->config['hash']) && $this->config['hash']) {
+            return $this->config['hash'];
         } else {
             throw new Exception('Please make sure you have set a code with php artisan code:set ****');
         }

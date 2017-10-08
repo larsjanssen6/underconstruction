@@ -22,26 +22,26 @@ class UnderConstructionModeTest extends TestCase
     /** @test */
     public function it_disables_login_for_one_minute_after_three_incorrect_attempts()
     {
-        $this->post('/under/check', ['code' => 1235])
+        $this->unsuccessfulLogin()
             ->assertStatus(401)
             ->assertJson([
-                'too_many_attemps' => false,
-                'attempts_left' => 2,
+                'too_many_attempts' => false,
+                'attempts_left' => 'Attempts left: 2',
             ]);
-//
-//        $this->unsuccessfulLogin()
-//            ->assertStatus(401)
-//            ->assertJson([
-//               'too_many_attemps' => false,
-//               'attempts_left' => 1
-//            ]);
-//
-//        $this->unsuccessfulLogin()
-//            ->assertStatus(401)
-//            ->assertJson([
-//                'seconds_message' => 'Too many attempts please try again in seconds.',
-//                'too_many_attemps' => true
-//            ]);
+
+        $this->unsuccessfulLogin()
+            ->assertStatus(401)
+            ->assertJson([
+               'too_many_attempts' => false,
+               'attempts_left' => 'Attempts left: 1',
+            ]);
+
+        $this->unsuccessfulLogin()
+            ->assertStatus(401)
+            ->assertJson([
+                'seconds_message' => 'Too many attempts please try again in 300 seconds.',
+                'too_many_attempts' => true,
+            ]);
     }
 
     protected function unsuccessfulLogin()

@@ -136,7 +136,7 @@
             },
 
             tooManyAttempts(error) {
-                return error.response.data.too_many_attemps;
+                return error.response.data.too_many_attempts;
             },
 
             back() {

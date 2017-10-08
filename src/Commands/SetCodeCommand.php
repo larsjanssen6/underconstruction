@@ -49,11 +49,28 @@ class SetCodeCommand extends Command
         $code = $this->argument('code');
 
         if ($this->validate($code)) {
-            file_put_contents(__DIR__.'/hash.txt', $this->hasher->make($code));
+            $hash = $this->hasher->make($code);
+            $this->setHashInEnvironmentFile($hash);
             $this->info(sprintf('Code: "%s" is set successfully.', $code));
         } else {
             $this->error('Wrong input. Code should contain 4 numbers.');
         }
+    }
+
+    protected function setHashInEnvironmentFile($hash)
+    {
+        $envPath = $this->laravel->environmentFilePath();
+        $envContent = file_get_contents($envPath);
+        $regex = '/^UNDER_CONSTRUCTION_HASH=.*$/';
+        $newLine = 'UNDER_CONSTRUCTION_HASH='.$hash;
+
+        if (preg_match($regex, $envContent)) {
+            $envContent = preg_replace_array($regex, $newLine, $envContent);
+        } else {
+            $envContent .= "\n".$newLine."\n";
+        }
+
+        file_put_contents($envPath, $envContent);
     }
 
     /**
@@ -63,7 +80,7 @@ class SetCodeCommand extends Command
      *
      * @return bool
      */
-    public function validate($code) : bool
+    public function validate($code): bool
     {
         return ctype_digit($code) && strlen($code) == 4;
     }
