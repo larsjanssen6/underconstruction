@@ -293,73 +293,78 @@
 
 <style lang="sass" scoped>
 
-    $success: #27ae60
-    $warning: #e74c3c
-    $box-shadow: 0 2px 3px 0
-    $shadow-color: rgba(0,0,0,.16)
-    $mobile-break-point: 750px
+$success: #27ae60
+$warning: #e74c3c
+$box-shadow: 0 2px 3px 0
+$shadow-color: rgba(0,0,0,.16)
+$mobile-break-point: 750px
 
-    .body_warning
-        color: $warning
+.wrong_code 
+  box-shadow: $box-shadow $warning
 
-    .body_success
-        color: $success
+.success_code 
+  box-shadow: $box-shadow $success
 
-    .flex
-        display: flex
+.body_warning 
+  color: $warning
 
-    .flex-one
-        flex: 1
+.body_success 
+  color: $success
 
-    .flex-two
-        flex: 1
 
-    .flex-three
-        flex: 3
+.flex 
+  display: flex
 
-    .full-height-vh
-        height: 100vh
+  &-one 
+    flex: 1
 
-    .full-height
-        height: 100%
+  &-two 
+    flex: 1
 
-    .flex-center
-        @extend .flex
-        align-items: center
-        justify-content: center
+  &-three 
+    flex: 3
 
-    .flex-column
-        flex-direction: column
+  &-center 
+    @extend .flex
+    align-items: center
+    justify-content: center
 
-    .panel
-        width: 300px
-        height: 400px
-        background: #F8F8FA
-        box-shadow: $box-shadow $shadow-color
-        border-radius: 6px
+  &-column 
+    flex-direction: column
 
-    .wrong_code
-        box-shadow: $box-shadow $warning
+.full-height 
+  height: 100%
 
-    .success_code
-        box-shadow: $box-shadow $success
+  &-vh 
+    height: 100vh
 
-    .number
-        margin: 10px
-        border-bottom: 1px solid #DCDCDE
-        cursor: pointer
-        div
-            h3
-                font-size: 15px
-                font-weight: 900
-        &:hover
-            box-shadow: $box-shadow $shadow-color
+.panel 
+  width: 300px
+  height: 400px
+  background: #F8F8FA
+  box-shadow: $box-shadow $shadow-color
+  border-radius: 6px
 
-    .title
-        font-size: 84px
-        margin-bottom: 40px
+.number 
+  margin: 10px
+  border-bottom: 1px solid #DCDCDE
+  cursor: pointer
 
-    @media only screen and (max-width: $mobile-break-point)
-        .title
-            display: none
+  div 
+    h3 
+      font-size: 15px
+      font-weight: 900
+
+  &:hover 
+    box-shadow: $box-shadow $shadow-color
+
+
+.title 
+  font-size: 84px
+  margin-bottom: 40px
+
+@media only screen and (max-width: $mobile-break-point) 
+  .title 
+    display: none
+
 </style>
