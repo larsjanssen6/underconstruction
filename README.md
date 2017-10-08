@@ -3,6 +3,11 @@
 [![StyleCI](https://styleci.io/repos/104500164/shield)](https://styleci.io/repos/104500164)
 [![Build Status](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/build.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/?branch=master)
+[![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/larsjanssen6/underconstruction/blob/master/LICENSE.md)
+ <a href="https://twitter.com/larsjansse">
+   <img src="http://img.shields.io/badge/author-@larsjansse-blue.svg?style=flat-square">
+ </a>
+  
 
 This Laravel package makes it possible for you to set your website in "Under Construction" mode. Only users with the correct 4 digits code can access your site. This package can be useful for you to show your website to a specific client. Everything works out of the box, and it's fully customizable.
 

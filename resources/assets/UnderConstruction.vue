@@ -78,6 +78,7 @@
             getNumber(row, number) {
                 return number + (3 - row) * 3;
             },
+
             /**
              * Add entered number to code array.
              */
@@ -197,59 +198,80 @@
     }
 </script>
 
-
 <style lang="sass" scoped>
-    $success: #27ae60
-    $warning: #e74c3c
-    $box-shadow: 0 2px 3px 0
-    $shadow-color: rgba(0,0,0,.16)
-    $mobile-break-point: 750px
-    .wrong_code
-        box-shadow: $box-shadow $warning
-    .success_code
-        box-shadow: $box-shadow $success
-    .body_warning
-        color: $warning
-    .body_success
-        color: $success
-    .flex
-        display: flex
-        &-one
-            flex: 1
-        &-two
-            flex: 1
-        &-three
-            flex: 3
-        &-center
-            @extend .flex
-            align-items: center
-            justify-content: center
-        &-column
-            flex-direction: column
-    .full-height
-        height: 100%
-        &-vh
-            height: 100vh
-    .panel
-        width: 300px
-        height: 400px
-        background: #F8F8FA
-        box-shadow: $box-shadow $shadow-color
-        border-radius: 6px
-    .number
-        margin: 10px
-        border-bottom: 1px solid #DCDCDE
-        cursor: pointer
-        div
-            h3
-                font-size: 15px
-                font-weight: 900
-        &:hover
-            box-shadow: $box-shadow $shadow-color
-    .title
-        font-size: 84px
-        margin-bottom: 40px
-    @media only screen and (max-width: $mobile-break-point)
-        .title
-            display: none
+
+$success: #27ae60
+$warning: #e74c3c
+$box-shadow: 0 2px 3px 0
+$shadow-color: rgba(0,0,0,.16)
+$mobile-break-point: 750px
+
+.wrong_code
+  box-shadow: $box-shadow $warning
+
+.success_code
+  box-shadow: $box-shadow $success
+
+.body_warning
+  color: $warning
+
+.body_success
+  color: $success
+
+
+.flex
+  display: flex
+
+  &-one
+    flex: 1
+
+  &-two
+    flex: 1
+
+  &-three
+    flex: 3
+
+  &-center
+    @extend .flex
+    align-items: center
+    justify-content: center
+
+  &-column
+    flex-direction: column
+
+.full-height
+  height: 100%
+
+  &-vh
+    height: 100vh
+
+.panel
+  width: 300px
+  height: 400px
+  background: #F8F8FA
+  box-shadow: $box-shadow $shadow-color
+  border-radius: 6px
+
+.number
+  margin: 10px
+  border-bottom: 1px solid #DCDCDE
+  cursor: pointer
+
+  div
+    h3
+      font-size: 15px
+      font-weight: 900
+
+  &:hover
+    box-shadow: $box-shadow $shadow-color
+
+
+.title
+  font-size: 84px
+  margin-bottom: 40px
+
+@media only screen and (max-width: $mobile-break-point)
+  .title
+    display: none
+
 </style>
