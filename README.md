@@ -151,6 +151,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
+if you want to test your configuration, please run command
+
 ``` bash
 composer test
 ```
