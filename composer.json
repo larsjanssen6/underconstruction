@@ -27,6 +27,7 @@
             "LarsJanssen\\UnderConstruction\\": "src/"
         }
     },
+    "minimum-stability":"dev",
     "scripts": {
         "test": "vendor/bin/phpunit"
     },
