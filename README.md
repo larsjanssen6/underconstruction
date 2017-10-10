@@ -1,8 +1,6 @@
 # Laravel Under Construction <img width="45" alt="schermafbeelding 2017-09-27 om 23 08 12" src="https://user-images.githubusercontent.com/7254997/30937972-c9632d04-a3d8-11e7-87f3-c44ce2b86d24.png">
 
 [![StyleCI](https://styleci.io/repos/104500164/shield)](https://styleci.io/repos/104500164)
-[![Build Status](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/build.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/larsjanssen6/underconstruction/?branch=master)
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/larsjanssen6/underconstruction/blob/master/LICENSE.md)
  <a href="https://twitter.com/larsjansse">
    <img src="http://img.shields.io/badge/author-@larsjansse-blue.svg?style=flat-square">
