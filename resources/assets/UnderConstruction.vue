@@ -37,6 +37,13 @@
 
                     <div class="flex-one">
                         <div class="flex full-height">
+
+                            <div class="flex-one number" @click="togglePassword">
+                                <div class="flex-center full-height">
+                                    <h3>{{ toggle_password_text }}</h3>
+                                </div>
+                            </div>
+
                             <div class="flex-one number" @click="addNumber(0)">
                                 <div class="flex-center full-height">
                                     <h3>0</h3>
@@ -63,12 +70,24 @@
         data() {
             return {
                 code: [],
+                real_code: [],
+                hide_code: true,
                 position: 0,
                 wrongCode: false,
                 success: false,
                 seconds_message: false,
                 attempts_left: false,
                 seconds: 0
+            }
+        },
+
+        computed: {
+            toggle_password_text: function() {
+                if ( this.hide_code ) {
+                    return "show";
+                } else {
+                    return "hide";
+                }
             }
         },
 
@@ -93,7 +112,7 @@
                 if(!this.seconds_message) {
                     this.setNumber(number);
                     if(this.codeIsComplete()) {
-                        axios.post("/under/check", { "code": this.code.join("") })
+                        axios.post("/under/check", { "code": this.real_code.join("") })
                             .then(() => {
                                 this.success = true;
                                 window.location.href = this.redirectUrl;
@@ -155,7 +174,12 @@
              * Set number at the correct array position.
              */
             setNumber(number) {
-                Vue.set(this.code, this.position, number);
+                Vue.set(this.real_code, this.position, number);
+                if ( this.hide_code ) {
+                    Vue.set(this.code, this.position, '-' );
+                } else {
+                    Vue.set(this.code, this.position, number);
+                }
                 this.position++;
             },
 
@@ -207,6 +231,24 @@
                             break;
                     }
                 });
+            },
+
+            /**
+             * Toggles password display mode
+             */
+            togglePassword() {
+                this.hide_code = !this.hide_code;
+
+                //update already entered code
+                this.code = ['*', '*', '*', '*'];
+                for ( let i = 0; i < this.position; i++ ) {
+                    if ( this.hide_code ) {
+                        Vue.set(this.code, i, '-' );
+                    } else {
+                        Vue.set(this.code, i, this.real_code[i]);
+                    }
+                }
+
             }
         }
     }
