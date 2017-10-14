@@ -23,6 +23,16 @@ return [
     'back-button' => 'back',
 
     /*
+    * Show button translation.
+    */
+    'show-button' => 'show',
+
+    /*
+     * Hide button translation.
+     */
+    'hide-button' => 'hide',
+
+    /*
      * Redirect url after a successful login.
      */
     'redirect-url' => '/',
@@ -32,35 +42,35 @@ return [
      */
     'throttle' => true,
 
-            /*
-            |--------------------------------------------------------------------------
-            | Throttle settings (only when throttle is true)
-            |--------------------------------------------------------------------------
-            |
+    /*
+    |--------------------------------------------------------------------------
+    | Throttle settings (only when throttle is true)
+    |--------------------------------------------------------------------------
+    |
 
-            */
-            /*
-             * Set the maximum number of attempts to allow.
-             */
-            'max_attempts' => 3,
+    */
+    /*
+     * Set the maximum number of attempts to allow.
+     */
+    'max_attempts' => 3,
 
-            /*
-             * Show attempts left.
-             */
-            'show_attempts_left' => true,
+    /*
+     * Show attempts left.
+     */
+    'show_attempts_left' => true,
 
-            /*
-             * Attempts left message.
-             */
-            'attempts_message' => 'Attempts left: %i',
+    /*
+     * Attempts left message.
+     */
+    'attempts_message' => 'Attempts left: %i',
 
-            /*
-             * Too many attempts message.
-             */
-            'seconds_message' => 'Too many attempts please try again in %i seconds.',
+    /*
+     * Too many attempts message.
+     */
+    'seconds_message' => 'Too many attempts please try again in %i seconds.',
 
-            /*
-             * Set the number of minutes to disable login.
-             */
-            'decay_minutes' => 5,
+    /*
+     * Set the number of minutes to disable login.
+     */
+    'decay_minutes' => 5,
 ];

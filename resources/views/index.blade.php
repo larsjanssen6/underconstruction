@@ -20,11 +20,13 @@
 <body>
 
 <div id="app">
-   <under-construction
-           :title="{{ @json_encode($title) }}"
-           :back-button="{{ @json_encode($backButton) }}"
-           :redirect-url="{{ @json_encode($redirectUrl) }}">
-   </under-construction>
+    <under-construction
+            :title="{{ @json_encode($title) }}"
+            :back-button="{{ @json_encode($backButton) }}"
+            :show-button="{{ @json_encode($showButton) }}"
+            :hide-button="{{ @json_encode($hideButton) }}"
+            :redirect-url="{{ @json_encode($redirectUrl) }}">
+    </under-construction>
 </div>
 
 <script src="/under/js"></script>

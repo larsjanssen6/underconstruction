@@ -2,6 +2,7 @@
 
 namespace LarsJanssen\UnderConstruction\Test\Integration;
 
+use Illuminate\Support\Facades\Artisan;
 use LarsJanssen\UnderConstruction\Test\TestCase;
 
 class UnderConstructionModeTest extends TestCase
@@ -20,7 +21,21 @@ class UnderConstructionModeTest extends TestCase
     }
 
     /** @test */
-    public function it_disables_login_for_one_minute_after_three_incorrect_attempts()
+    public function it_redirects_to_redirect_url_specified_in_config_after_successful_login()
+    {
+        Artisan::call('code:set', [
+            'code' => '1234',
+        ]);
+
+        //Probleem is dat de hash niet in de config wordt overschreven door 9999.
+
+        $this->post('/under/check', ['code' => '1234'])
+            ->assertStatus(200)
+            ->assertRedirect($this->config['redirect-url']);
+    }
+
+    /** @test */
+    public function it_disables_login_for_three_minute_after_three_incorrect_attempts()
     {
         $this->unsuccessfulLogin()
             ->assertStatus(401)
@@ -42,6 +57,20 @@ class UnderConstructionModeTest extends TestCase
                 'seconds_message' => 'Too many attempts please try again in 300 seconds.',
                 'too_many_attempts' => true,
             ]);
+    }
+
+    /** @test */
+    public function it_sets_title_correctly()
+    {
+        $this->get('/under/construction')
+            ->assertSee('title');
+    }
+
+    /** @test */
+    public function it_sets_back_button_translation_correctly()
+    {
+        $this->get('/under/construction')
+            ->assertSee('back-button');
     }
 
     protected function unsuccessfulLogin()

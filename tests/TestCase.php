@@ -23,7 +23,9 @@ class TestCase extends Orchestra
 
         $this->registerServiceProvider();
 
-        $this->config = $this->app['config']->get('demo-mode');
+        $this->app->useEnvironmentPath(getcwd() . '/tests');
+
+        $this->config = $this->app['config']->get('under-construction');
     }
 
     /**
@@ -34,6 +36,10 @@ class TestCase extends Orchestra
         $app['config']->set('app.key', '6rE9Nz59bGRbeMATftriyQjrpF7DcOQm');
 
         $app['config']->set('under-construction.enabled', true);
+
+        $app['config']->set('under-construction.title', 'title');
+
+        $app['config']->set('under-construction.back-button', 'back-button');
 
         $app['config']->set('under-construction.hash', 9999);
     }

@@ -55,6 +55,8 @@ class CodeController extends Controller
         return view('views::index')->with([
             'title'       => $this->config['title'],
             'backButton'  => $this->config['back-button'],
+            'showButton'  => $this->config['show-button'],
+            'hideButton'  => $this->config['hide-button'],
             'redirectUrl' => $this->config['redirect-url'],
         ]);
     }

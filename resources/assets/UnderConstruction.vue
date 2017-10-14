@@ -37,6 +37,13 @@
 
                     <div class="flex-one">
                         <div class="flex full-height">
+
+                            <div class="flex-one number" @click="togglePassword">
+                                <div class="flex-center full-height">
+                                    <h3>{{ toggle_password_text }}</h3>
+                                </div>
+                            </div>
+
                             <div class="flex-one number" @click="addNumber(0)">
                                 <div class="flex-center full-height">
                                     <h3>0</h3>
@@ -58,17 +65,31 @@
 
 <script>
     export default {
-        props: ['title', 'backButton', 'redirectUrl'],
+        props: [
+            'title',
+            'backButton',
+            'redirectUrl',
+            'showButton',
+            'hideButton'
+        ],
 
         data() {
             return {
                 code: [],
+                real_code: [],
+                hide_code: true,
                 position: 0,
                 wrongCode: false,
                 success: false,
                 seconds_message: false,
                 attempts_left: false,
                 seconds: 0
+            }
+        },
+
+        computed: {
+            toggle_password_text: function() {
+                return this.hide_code ? this.showButton : this.hideButton;
             }
         },
 
@@ -93,7 +114,7 @@
                 if(!this.seconds_message) {
                     this.setNumber(number);
                     if(this.codeIsComplete()) {
-                        axios.post("/under/check", { "code": this.code.join("") })
+                        axios.post("/under/check", { "code": this.real_code.join("") })
                             .then(() => {
                                 this.success = true;
                                 window.location.href = this.redirectUrl;
@@ -155,7 +176,12 @@
              * Set number at the correct array position.
              */
             setNumber(number) {
-                Vue.set(this.code, this.position, number);
+                Vue.set(this.real_code, this.position, number);
+                if (this.hide_code) {
+                    Vue.set(this.code, this.position, '-' );
+                } else {
+                    Vue.set(this.code, this.position, number);
+                }
                 this.position++;
             },
 
@@ -207,6 +233,24 @@
                             break;
                     }
                 });
+            },
+
+            /**
+             * Toggles password display mode
+             */
+            togglePassword() {
+                this.hide_code = !this.hide_code;
+
+                //update already entered code
+                this.code = ['*', '*', '*', '*'];
+                for ( let i = 0; i < this.position; i++ ) {
+                    if ( this.hide_code ) {
+                        Vue.set(this.code, i, '-' );
+                    } else {
+                        Vue.set(this.code, i, this.real_code[i]);
+                    }
+                }
+
             }
         }
     }
@@ -214,76 +258,76 @@
 
 <style lang="sass" scoped>
 
-$success: #27ae60
-$warning: #e74c3c
-$box-shadow: 0 2px 3px 0
-$shadow-color: rgba(0,0,0,.16)
-$mobile-break-point: 750px
+    $success: #27ae60
+    $warning: #e74c3c
+    $box-shadow: 0 2px 3px 0
+    $shadow-color: rgba(0,0,0,.16)
+    $mobile-break-point: 750px
 
-.wrong_code
-  box-shadow: $box-shadow $warning
+    .wrong_code
+        box-shadow: $box-shadow $warning
 
-.success_code
-  box-shadow: $box-shadow $success
+    .success_code
+        box-shadow: $box-shadow $success
 
-.body_warning
-  color: $warning
+    .body_warning
+        color: $warning
 
-.body_success
-  color: $success
+    .body_success
+        color: $success
 
-.flex
-  display: flex
+    .flex
+        display: flex
 
-  &-one
-    flex: 1
+        &-one
+            flex: 1
 
-  &-two
-    flex: 1
+        &-two
+            flex: 1
 
-  &-three
-    flex: 3
+        &-three
+            flex: 3
 
-  &-center
-    @extend .flex
-    align-items: center
-    justify-content: center
+        &-center
+            @extend .flex
+            align-items: center
+            justify-content: center
 
-  &-column
-    flex-direction: column
+        &-column
+            flex-direction: column
 
-.full-height
-  height: 100%
+    .full-height
+        height: 100%
 
-  &-vh
-    height: 100vh
+        &-vh
+            height: 100vh
 
-.panel
-  width: 300px
-  height: 400px
-  background: #F8F8FA
-  box-shadow: $box-shadow $shadow-color
-  border-radius: 6px
+    .panel
+        width: 300px
+        height: 400px
+        background: #F8F8FA
+        box-shadow: $box-shadow $shadow-color
+        border-radius: 6px
 
-.number
-  margin: 10px
-  border-bottom: 1px solid #DCDCDE
-  cursor: pointer
+    .number
+        margin: 10px
+        border-bottom: 1px solid #DCDCDE
+        cursor: pointer
 
-  div
-    h3
-      font-size: 15px
-      font-weight: 900
+        div
+            h3
+                font-size: 15px
+                font-weight: 900
 
-  &:hover
-    box-shadow: $box-shadow $shadow-color
+        &:hover
+            box-shadow: $box-shadow $shadow-color
 
-.title
-  font-size: 84px
-  margin-bottom: 40px
+    .title
+        font-size: 84px
+        margin-bottom: 40px
 
-@media only screen and (max-width: $mobile-break-point)
-  .title
-    display: none
+    @media only screen and (max-width: $mobile-break-point)
+        .title
+            display: none
 
 </style>
