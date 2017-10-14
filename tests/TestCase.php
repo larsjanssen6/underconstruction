@@ -23,7 +23,7 @@ class TestCase extends Orchestra
 
         $this->registerServiceProvider();
 
-        $this->app->useEnvironmentPath(getcwd() . '/tests');
+        $this->app->useEnvironmentPath(getcwd().'/tests');
 
         $this->config = $this->app['config']->get('under-construction');
     }
