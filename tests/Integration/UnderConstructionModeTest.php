@@ -21,17 +21,12 @@ class UnderConstructionModeTest extends TestCase
     }
 
     /** @test */
-    public function it_redirects_to_redirect_url_specified_in_config_after_successful_login()
+    public function it_sets_session_correctly_after_successful_login()
     {
-        Artisan::call('code:set', [
-            'code' => '1234',
-        ]);
-
-        //Probleem is dat de hash niet in de config wordt overschreven door 9999.
+        $this->app['config']->set('under-construction.hash', '$2y$10$c103PP/1gdUtfVC.REX1H.9PfiLU0n99jWwtL6v7Fb6R8gSoT4N8C');
 
         $this->post('/under/check', ['code' => '1234'])
-            ->assertStatus(200)
-            ->assertRedirect($this->config['redirect-url']);
+            ->assertSessionHas('can_visit', true);
     }
 
     /** @test */
@@ -73,6 +68,20 @@ class UnderConstructionModeTest extends TestCase
             ->assertSee('back-button');
     }
 
+    /** @test */
+    public function it_sets_show_button_translation_correctly()
+    {
+        $this->get('/under/construction')
+            ->assertSee('show');
+    }
+
+    /** @test */
+    public function it_sets_hide_button_translation_correctly()
+    {
+        $this->get('/under/construction')
+            ->assertSee('hide');
+    }
+
     protected function unsuccessfulLogin()
     {
         return $this->post('/under/check', ['code' => 1235]);
@@ -88,6 +97,7 @@ class UnderConstructionModeTest extends TestCase
     protected function assertCannotVisitProductionSite()
     {
         $this->get('/test')
+            ->assertSessionMissing('can_visit')
             ->assertRedirect()
             ->assertHeader('location', '/under/construction');
     }
