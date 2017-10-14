@@ -2,7 +2,6 @@
 
 namespace LarsJanssen\UnderConstruction\Test\Integration;
 
-use Illuminate\Support\Facades\Artisan;
 use LarsJanssen\UnderConstruction\Test\TestCase;
 
 class UnderConstructionModeTest extends TestCase
