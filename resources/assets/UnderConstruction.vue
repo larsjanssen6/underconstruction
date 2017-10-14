@@ -177,7 +177,8 @@
              */
             setNumber(number) {
                 Vue.set(this.real_code, this.position, number);
-                if (this.hide_code) {
+
+                if ( this.hide_code ) {
                     Vue.set(this.code, this.position, '-' );
                 } else {
                     Vue.set(this.code, this.position, number);
