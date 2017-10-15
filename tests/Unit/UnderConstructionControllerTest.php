@@ -21,7 +21,7 @@ class UnderConstructionControllerTest extends TestCase
         return $method->invokeArgs($object, $parameters);
     }
 
-    public function tearDown() 
+    public function tearDown()
     {
         m::close();
     }
@@ -42,14 +42,11 @@ class UnderConstructionControllerTest extends TestCase
     /** @test */
     public function it_not_activate_Throttle()
     {
-
         $this->arrayConfig['throttle'] = false;
         $codeController = $this->createController();
 
         $active = $this->invokeMethod($codeController, 'throttleIsActive');
 
         $this->assertfalse($active);
-
     }
-
 }
