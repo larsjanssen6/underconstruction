@@ -8,7 +8,6 @@ use Mockery as m;
 
 class UnderConstructionControllerTest extends TestCase
 {
-
     protected $arrayConfig;
     protected $config;
 
