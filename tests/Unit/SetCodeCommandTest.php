@@ -12,7 +12,6 @@ use Mockery;
 
 class SetCodeCommandTest extends TestCase
 {
-
     /**
      * @test
      * @dataProvider invalidCodeProvider
@@ -73,7 +72,7 @@ EOP;
             ['12345'],
             ['1 23'],
             ['zzzz'],
-            ['a']
+            ['a'],
         ];
     }
 
@@ -82,7 +81,7 @@ EOP;
         return [
             ['', ''],
             ['foo=bar', 'foo=bar'],
-            ["foo=bar\nUNDER_CONSTRUCTION_HASH=fakehash\n", "foo=bar"]
+            ["foo=bar\nUNDER_CONSTRUCTION_HASH=fakehash\n", 'foo=bar'],
         ];
     }
 }
