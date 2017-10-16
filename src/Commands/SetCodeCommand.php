@@ -4,6 +4,7 @@ namespace LarsJanssen\UnderConstruction\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Hashing\Hasher;
+use Illuminate\Filesystem\Filesystem;
 
 class SetCodeCommand extends Command
 {
@@ -29,14 +30,21 @@ class SetCodeCommand extends Command
     protected $hasher;
 
     /**
+     * @var \Illuminate\Filesystem\Filesystem
+     */
+    protected $filesystem;
+
+    /**
      * Create a new command instance.
      *
      * @param Hasher $hasher
+     * @param Filesystem $filesystem
      */
-    public function __construct(Hasher $hasher)
+    public function __construct(Hasher $hasher, Filesystem $filesystem)
     {
         parent::__construct();
         $this->hasher = $hasher;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -60,17 +68,17 @@ class SetCodeCommand extends Command
     protected function setHashInEnvironmentFile($hash)
     {
         $envPath = $this->laravel->environmentFilePath();
-        $envContent = file_get_contents($envPath);
-        $regex = '/^UNDER_CONSTRUCTION_HASH=.*$/';
+        $envContent = $this->filesystem->get($envPath);
+        $regex = '/UNDER_CONSTRUCTION_HASH=.*$/';
         $newLine = sprintf('UNDER_CONSTRUCTION_HASH=%s', $hash);
 
         if (preg_match($regex, $envContent)) {
-            $envContent = preg_replace_array($regex, $newLine, $envContent);
+            $envContent = preg_replace($regex, $newLine, $envContent);
         } else {
             $envContent .= "\n".$newLine."\n";
         }
 
-        file_put_contents($envPath, $envContent);
+        $this->filesystem->put($envPath, $envContent);
     }
 
     /**
