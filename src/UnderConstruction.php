@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class UnderConstruction
 {
     protected $config;
-
+    
     public function __construct(Repository $config)
     {
         $this->config = $config->get('under-construction');
@@ -23,7 +23,7 @@ class UnderConstruction
         }
 
         if (! $this->hasAccess($request)) {
-            return new RedirectResponse('/under/construction');
+            return new RedirectResponse($this->config->construction_link);
         }
 
         return $next($request);
