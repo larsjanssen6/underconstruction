@@ -23,7 +23,7 @@ class UnderConstruction
         }
 
         if (! $this->hasAccess($request)) {
-            return new RedirectResponse($this->config->construction_link);
+            return new RedirectResponse($this->config['construction_link']);
         }
 
         return $next($request);
