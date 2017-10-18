@@ -11,6 +11,11 @@ return [
      * Hash for the current pin code
      */
     'hash' => env('UNDER_CONSTRUCTION_HASH', null),
+    
+    /*
+     * Under construction link.
+     */
+    'construction_link' => '/under/construction',    
 
     /*
      * Under construction title.
