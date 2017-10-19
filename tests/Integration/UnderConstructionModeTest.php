@@ -70,14 +70,14 @@ class UnderConstructionModeTest extends TestCase
     /** @test */
     public function it_sets_show_button_translation_correctly()
     {
-        $this->get('/under/construction')
+        $this->get($this->app['config']->get('construction_link'))
             ->assertSee('show');
     }
 
     /** @test */
     public function it_sets_hide_button_translation_correctly()
     {
-        $this->get('/under/construction')
+        $this->get($this->app['config']->get('construction_link'))
             ->assertSee('hide');
     }
 
@@ -98,6 +98,6 @@ class UnderConstructionModeTest extends TestCase
         $this->get('/test')
             ->assertSessionMissing('can_visit')
             ->assertRedirect()
-            ->assertHeader('location', '/under/construction');
+            ->assertHeader('location', $this->app['config']->get('construction_link') );
     }
 }
