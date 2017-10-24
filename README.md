@@ -7,7 +7,7 @@
  </a>
   
 
-This Laravel package makes it possible to set your website in "Under Construction" mode. Only users with the correct 4 digits code can access your site. This package can for example be useful to show your website to a specific client. Everything works out of the box, and it's fully customizable.
+This Laravel package makes it possible to set your website in "Under Construction" mode. Only users with the correct 4 digit code can access your site. This package can for example be useful to show your website to a specific client. Everything works out of the box, and it's fully customizable.
 
 <strong>If you appreciate my work please give this repo a star.</strong>
 
