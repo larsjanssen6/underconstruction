@@ -4,9 +4,9 @@ namespace LarsJanssen\UnderConstruction\Controllers;
 
 use Exception;
 use Illuminate\Config\Repository;
+use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Hash;
 use LarsJanssen\UnderConstruction\Facades\TransFormer;
 use LarsJanssen\UnderConstruction\Throttle;
 
@@ -66,16 +66,17 @@ class CodeController extends Controller
      * then return the proper response.
      *
      * @param Request $request
+     * @param Hasher  $hasher
      *
      * @throws Exception
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function check(Request $request)
+    public function check(Request $request, Hasher $hasher)
     {
         $request->validate(['code' => 'required|numeric']);
 
-        if (Hash::check($request->code, $this->getHash())) {
+        if ($hasher->check($request->code, $this->getHash())) {
             session(['can_visit' => true]);
 
             return response([
