@@ -4,9 +4,9 @@ namespace LarsJanssen\UnderConstruction\Controllers;
 
 use Exception;
 use Illuminate\Config\Repository;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
 use LarsJanssen\UnderConstruction\Facades\TransFormer;
 use LarsJanssen\UnderConstruction\Throttle;
 
