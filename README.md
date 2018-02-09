@@ -5,7 +5,7 @@
  <a href="https://twitter.com/larsjansse">
    <img src="http://img.shields.io/badge/author-@larsjansse-blue.svg?style=flat-square">
  </a>
-  
+
 
 This Laravel package makes it possible to set your website in "Under Construction" mode. Only users with the correct 4 digit code can access your site. This package can for example be useful to show your website to a specific client. Everything works out of the box, and it's fully customizable.
 
@@ -26,11 +26,10 @@ Then the  ```service provider``` must be installed.
 > Laravel 5.5+ users: this step may be skipped, as we can auto-register the package with the framework.
 
 ```php
-
 // config/app.php
 
 'providers' => [
-    '...',
+    // ...
     'LarsJanssen\UnderConstruction\UnderConstructionServiceProvider'
 ];
 ```
@@ -41,7 +40,7 @@ The ```\LarsJanssen\UnderConstruction\UnderConstruction::class``` middleware mus
 //app/Http/Kernel.php
 
 protected $routeMiddleware = [
-  ...
+  // ...
   'under-construction' => \LarsJanssen\UnderConstruction\UnderConstruction::class,
 ];
 ```
@@ -53,11 +52,10 @@ Publish the default configuration file.
 ```bash
 php artisan vendor:publish
 
-// Or...
+# Or...
 
 php artisan vendor:publish --provider="LarsJanssen\UnderConstruction\UnderConstructionServiceProvider"
 ```
-
 
 This package is fully customizable. This is the content of the published config file `under-construction.php`:
 
@@ -87,8 +85,8 @@ return [
     'back-button' => 'back',
 
     /*
-    * Show button translation.
-    */
+     * Show button translation.
+     */
     'show-button' => 'show',
 
     /*
@@ -111,8 +109,8 @@ return [
     | Throttle settings (only when throttle is true)
     |--------------------------------------------------------------------------
     |
-
     */
+    
     /*
      * Set the maximum number of attempts to allow.
      */
@@ -144,7 +142,7 @@ return [
 
 You'll have to set a 4 digit code. You can do that by running this custom
 artisan command (in this example the code is ```1234``` ,you can obviously set another code). It
-will generate a hash that will be stored in your .env file. 
+will generate a hash that will be stored in your `.env` file. 
 
 ```bash
 php artisan code:set 1234
@@ -185,7 +183,7 @@ If you discover any security related issues, please email mail@larsjanssen.net. 
 
 ## About me
 I'm Lars Janssen from The Netherlands and like to work on web projects. You can
-follow me on <a href="https://twitter.com/larsjansse">twitter</a>.
+follow me on <a href="https://twitter.com/larsjansse">Twitter</a>.
 
 ## License
 
