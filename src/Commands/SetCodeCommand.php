@@ -3,8 +3,8 @@
 namespace LarsJanssen\UnderConstruction\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Hash;
 
 class SetCodeCommand extends Command
 {
@@ -23,13 +23,6 @@ class SetCodeCommand extends Command
     protected $description = 'Set here the under construction code';
 
     /**
-     * The hasher implementation.
-     *
-     * @var \Illuminate\Contracts\Hashing\Hasher
-     */
-    protected $hasher;
-
-    /**
      * @var \Illuminate\Filesystem\Filesystem
      */
     protected $filesystem;
@@ -37,13 +30,11 @@ class SetCodeCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param Hasher $hasher
      * @param Filesystem $filesystem
      */
-    public function __construct(Hasher $hasher, Filesystem $filesystem)
+    public function __construct(Filesystem $filesystem)
     {
         parent::__construct();
-        $this->hasher = $hasher;
         $this->filesystem = $filesystem;
     }
 
@@ -57,7 +48,7 @@ class SetCodeCommand extends Command
         $code = $this->argument('code');
 
         if ($this->validate($code)) {
-            $hash = $this->hasher->make($code);
+            $hash = Hash::make($code);
             $this->setHashInEnvironmentFile($hash);
             $this->info(sprintf('Code: "%s" is set successfully.', $code));
         } else {
@@ -65,11 +56,15 @@ class SetCodeCommand extends Command
         }
     }
 
+    /**
+     * @param $hash
+     */
     protected function setHashInEnvironmentFile($hash)
     {
         $envPath = $this->laravel->environmentFilePath();
         $envContent = $this->filesystem->get($envPath);
-        $regex = '/UNDER_CONSTRUCTION_HASH=.*$/';
+        $regex = '/UNDER_CONSTRUCTION_HASH=[^\s]+/';
+        var_dump($hash);
         $newLine = sprintf('UNDER_CONSTRUCTION_HASH=%s', $hash);
 
         if (preg_match($regex, $envContent)) {

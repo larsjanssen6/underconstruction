@@ -6,6 +6,12 @@ use Exception;
 
 class TransFormer
 {
+    /**
+     * @param $replace
+     * @param $message
+     * @return mixed
+     * @throws Exception
+     */
     public function transform($replace, $message)
     {
         if (strpos($message, '%i') === false) {
