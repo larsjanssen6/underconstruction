@@ -5,7 +5,7 @@
  <a href="https://twitter.com/larsjansse">
    <img src="http://img.shields.io/badge/author-@larsjansse-blue.svg?style=flat-square">
  </a>
-
+[![Total Downloads](https://poser.pugx.org/phpunit/phpunit/downloads)](https://packagist.org/packages/larsjanssen6/underconstruction)
 
 This Laravel package makes it possible to set your website in "Under Construction" mode. Only users with the correct 4 digit code can access your site. This package can for example be useful to show your website to a specific client. Everything works out of the box, and it's fully customizable.
 
