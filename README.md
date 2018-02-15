@@ -174,7 +174,7 @@ I would love to hear your ideas to improve my codeing style and conventions. Fee
 
 ## Security
 
-If you discover any security related issues, please email mail@larsjanssen.net. You can also make an issue. 
+If you discover any security related issues, please email larsjanssen64@gmail.com. You can also make an issue. 
 
 ## Credits
 
