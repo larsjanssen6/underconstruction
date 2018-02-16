@@ -48,7 +48,7 @@ class SetCodeCommand extends Command
         $code = $this->argument('code');
 
         if ($this->validate($code)) {
-            $hash = Hash::make($code);
+            $hash = str_replace(['\\','$'], ['', '\$'], Hash::make($code));
             $this->setHashInEnvironmentFile($hash);
             $this->info(sprintf('Code: "%s" is set successfully.', $code));
         } else {
@@ -63,12 +63,12 @@ class SetCodeCommand extends Command
     {
         $envPath = $this->laravel->environmentFilePath();
         $envContent = $this->filesystem->get($envPath);
-        $regex = '/UNDER_CONSTRUCTION_HASH=[^\s]+/';
-        var_dump($hash);
-        $newLine = sprintf('UNDER_CONSTRUCTION_HASH=%s', $hash);
+
+        $regex = '/UNDER_CONSTRUCTION_HASH=\S+/';
+        $newLine = "UNDER_CONSTRUCTION_HASH=$hash";
 
         if (preg_match($regex, $envContent)) {
-            $envContent = preg_replace($regex, $newLine, $envContent);
+            $envContent =  preg_replace($regex, $newLine, $envContent);
         } else {
             $envContent .= "\n".$newLine."\n";
         }
