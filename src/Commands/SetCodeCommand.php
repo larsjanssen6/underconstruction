@@ -57,6 +57,8 @@ class SetCodeCommand extends Command
     }
 
     /**
+     * Set the hash in .env file. 
+     *
      * @param $hash
      */
     protected function setHashInEnvironmentFile($hash)
@@ -65,12 +67,12 @@ class SetCodeCommand extends Command
         $envContent = $this->filesystem->get($envPath);
 
         $regex = '/UNDER_CONSTRUCTION_HASH=\S+/';
-        $newLine = "UNDER_CONSTRUCTION_HASH=$hash";
 
         if (preg_match($regex, $envContent)) {
-            $envContent =  preg_replace($regex, $newLine, $envContent);
+            $hash = str_replace(['\\','$'], ['', '\$'], $hash);
+            $envContent =  preg_replace($regex, $this->newLine($hash), $envContent);
         } else {
-            $envContent .= "\n".$newLine."\n";
+            $envContent .= "\n".$this->newLine($hash)."\n";
         }
 
         $this->filesystem->put($envPath, $envContent);
