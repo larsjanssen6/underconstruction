@@ -57,7 +57,7 @@ class SetCodeCommand extends Command
     }
 
     /**
-     * Set the hash in .env file. 
+     * Set the hash in .env file.
      *
      * @param $hash
      */
@@ -69,8 +69,8 @@ class SetCodeCommand extends Command
         $regex = '/UNDER_CONSTRUCTION_HASH=\S+/';
 
         if (preg_match($regex, $envContent)) {
-            $hash = str_replace(['\\','$'], ['', '\$'], $hash);
-            $envContent =  preg_replace($regex, $this->newLine($hash), $envContent);
+            $hash = str_replace(['\\', '$'], ['', '\$'], $hash);
+            $envContent = preg_replace($regex, $this->newLine($hash), $envContent);
         } else {
             $envContent .= "\n".$this->newLine($hash)."\n";
         }
