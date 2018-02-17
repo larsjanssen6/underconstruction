@@ -48,7 +48,7 @@ class SetCodeCommand extends Command
         $code = $this->argument('code');
 
         if ($this->validate($code)) {
-            $hash = str_replace(['\\','$'], ['', '\$'], Hash::make($code));
+            $hash = Hash::make($code);
             $this->setHashInEnvironmentFile($hash);
             $this->info(sprintf('Code: "%s" is set successfully.', $code));
         } else {
