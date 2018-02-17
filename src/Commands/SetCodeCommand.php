@@ -79,6 +79,15 @@ class SetCodeCommand extends Command
     }
 
     /**
+     * @param $hash
+     * @return string
+     */
+    private function newLine($hash)
+    {
+        return "UNDER_CONSTRUCTION_HASH=$hash";
+    }
+
+    /**
      * Check if given code is valid.
      *
      * @param $code
