@@ -188,3 +188,11 @@ follow me on <a href="https://twitter.com/larsjansse">Twitter</a>.
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## ❤️ Open-Source Software - Give ⭐️
+We have included the awesome `symfony/thanks` composer package as a dev
+dependency. Let your OS package maintainers know you appreciate them by starring
+the packages you use. Simply run composer thanks after installing this package.
+(And not to worry, since it's a dev-dependency it won't be installed in your
+live environment.)
+
