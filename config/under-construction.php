@@ -74,8 +74,8 @@ return [
          */
         'decay_minutes' => 5,
 
-        /**
+        /*
          * Prevent the site from being indexed by Robots when locked
          */
-        'lock_robots' => true
+        'lock_robots' => true,
 ];
