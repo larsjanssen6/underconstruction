@@ -73,4 +73,9 @@ return [
          * Set the number of minutes to disable login.
          */
         'decay_minutes' => 5,
+
+        /**
+         * Prevent the site from being indexed by Robots when locked
+         */
+        'lock_robots' => true
 ];
