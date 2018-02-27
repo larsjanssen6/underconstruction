@@ -200,52 +200,39 @@
                 document.addEventListener("keydown", (e) => {
                     switch (e.keyCode) {
                         case 48:
-                        case 96:
                             this.addNumber(0);
                             break;
                         case 49:
-                        case 97:
                             this.addNumber(1);
                             break;
                         case 50:
-                        case 98:
                             this.addNumber(2);
                             break;
                         case 51:
-                        case 99:
                             this.addNumber(3);
                             break;
                         case 52:
-                        case 100:
                             this.addNumber(4);
                             break;
                         case 53:
-                        case 101:
                             this.addNumber(5);
                             break;
                         case 54:
-                        case 102:
                             this.addNumber(6);
                             break;
                         case 55:
-                        case 103:
                             this.addNumber(7);
                             break;
                         case 56:
-                        case 104:
                             this.addNumber(8);
                             break;
                         case 57:
-                        case 105:
                             this.addNumber(9);
                             break;
                         case 8:
                             this.back();
                             break;
-                        default:
-                            return;
                     }
-                    e.preventDefault();
                 });
             },
 
