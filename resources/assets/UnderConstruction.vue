@@ -232,7 +232,10 @@
                         case 8:
                             this.back();
                             break;
+                        default:
+                            return;
                     }
+                    e.preventDefault();
                 });
             },
 
