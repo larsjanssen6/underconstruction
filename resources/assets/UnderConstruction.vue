@@ -206,7 +206,7 @@ console.log("test0");
                     }
 
                     let number = parseInt(String.fromCharCode(e.keyCode));
-console.log("test1", number, isNaN(number));
+console.log("test1", number, isNaN(number), String.fromCharCode(e.keyCode), e.keyCode);
                     if (isNaN(number)) {
                         return;
                     }
