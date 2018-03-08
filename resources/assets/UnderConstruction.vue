@@ -197,42 +197,20 @@
              * Register all keyboard numbers.
              */
             registerKeys() {
-                document.addEventListener("keydown", (e) => {
-                    switch (e.keyCode) {
-                        case 48:
-                            this.addNumber(0);
-                            break;
-                        case 49:
-                            this.addNumber(1);
-                            break;
-                        case 50:
-                            this.addNumber(2);
-                            break;
-                        case 51:
-                            this.addNumber(3);
-                            break;
-                        case 52:
-                            this.addNumber(4);
-                            break;
-                        case 53:
-                            this.addNumber(5);
-                            break;
-                        case 54:
-                            this.addNumber(6);
-                            break;
-                        case 55:
-                            this.addNumber(7);
-                            break;
-                        case 56:
-                            this.addNumber(8);
-                            break;
-                        case 57:
-                            this.addNumber(9);
-                            break;
-                        case 8:
-                            this.back();
-                            break;
+                document.addEventListener("keydup", (e) => {
+                    if (e.keyCode == 8) {
+                        this.back();
+
+                        return;
                     }
+
+                    let number = parseInt(String.fromCharCode(e.keyCode));
+
+                    if (isNaN(number)) {
+                        return;
+                    }
+
+                    this.addNumber(number);
                 });
             },
 
