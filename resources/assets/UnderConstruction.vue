@@ -198,6 +198,7 @@
              */
             registerKeys() {
                 document.addEventListener("keydup", (e) => {
+console.log("test0");
                     if (e.keyCode == 8) {
                         this.back();
 
@@ -205,10 +206,11 @@
                     }
 
                     let number = parseInt(String.fromCharCode(e.keyCode));
-
+console.log("test1", number, isNaN(number));
                     if (isNaN(number)) {
                         return;
                     }
+console.log("test2", number);
 
                     this.addNumber(number);
                 });
