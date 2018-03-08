@@ -197,7 +197,7 @@
              * Register all keyboard numbers.
              */
             registerKeys() {
-                document.addEventListener("keyup", (e) => {
+                document.addEventListener("keydown", (e) => {
 console.log("test0");
                     if (e.keyCode == 8) {
                         this.back();
