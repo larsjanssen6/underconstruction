@@ -17,6 +17,5 @@
   },
   "dependencies": {
     "es6-promise": "^4.1.1",
-    "vue-sweetalert2": "^1.0.7"
   }
 }
