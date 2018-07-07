@@ -35,6 +35,8 @@ class UnderConstruction
         }
 
         if (! $this->hasAccess($request)) {
+            session(['intended.url' => url()->current()]);
+
             return new RedirectResponse('/under/construction');
         }
 
