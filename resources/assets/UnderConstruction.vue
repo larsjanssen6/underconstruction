@@ -1,5 +1,9 @@
 <template>
     <div class="flex-center flex-column full-height-vh" :class="{ body_warning: wrongCode, body_success: success }">
+        <loading :active.sync="isLoading"
+                 :can-cancel="false"
+                 :is-full-page="true"></loading>
+
         <div class="title">
             {{ title }}
         </div>
@@ -64,6 +68,9 @@
 </template>
 
 <script>
+    import Loading from 'vue-loading-overlay';
+    import 'vue-loading-overlay/dist/vue-loading.css';
+
     export default {
         props: [
             'title',
@@ -83,7 +90,8 @@
                 success: false,
                 seconds_message: false,
                 attempts_left: false,
-                seconds: 0
+                seconds: 0,
+                isLoading: false
             }
         },
 
@@ -96,6 +104,11 @@
         mounted() {
             this.registerKeys();
             this.resetCode();
+            this.checkIfLimited();
+        },
+
+        components: {
+            Loading
         },
 
         methods: {
@@ -114,6 +127,7 @@
                 if(!this.seconds_message) {
                     this.setNumber(number);
                     if(this.codeIsComplete()) {
+                        this.isLoading = true;
                         axios.post("/under/check", { "code": this.real_code.join("") })
                             .then(() => {
                                 this.success = true;
@@ -129,6 +143,9 @@
                                     this.attempts_left = error.response.data.attempts_left;
                                 }
                                 this.resetCode();
+                            })
+                            .finally(() => {
+                                this.isLoading = false;
                             });
                     }
                 }
@@ -197,20 +214,25 @@
              * Register all keyboard numbers.
              */
             registerKeys() {
-                document.addEventListener("keypress", (e) => {
-                    if (e.keyCode == 8) {
+                document.addEventListener("keydown", (e) => {
+                    e.preventDefault();
+                    let key = e.which || e.charCode || e.keyCode || 0;
+
+                    if (key == 8) {
                         this.back();
 
                         return;
                     }
 
-                    let number = parseInt(String.fromCharCode(e.keyCode));
+                    let number = parseInt(String.fromCharCode(key));
 
                     if (isNaN(number)) {
                         return;
                     }
 
-                    this.addNumber(number);
+                    if(!this.isLoading) {
+                        this.addNumber(number);
+                    }
                 });
             },
 
@@ -230,6 +252,27 @@
                     }
                 }
 
+            },
+
+            /**
+             * run at start to check whether user been limited from server
+             */
+            checkIfLimited() {
+                this.isLoading = true;
+                axios.post("/under/checkiflimited")
+                    .catch((error) => {
+                        this.wrongCode = true;
+                        setTimeout(() => this.wrongCode = false, 5000);
+                        if(this.tooManyAttempts(error)) {
+                            this.countDown(error.response.data.seconds_message);
+                        }
+                        else {
+                            this.attempts_left = error.response.data.attempts_left;
+                        }
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
+                    });
             }
         }
     }

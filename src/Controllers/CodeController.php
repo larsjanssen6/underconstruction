@@ -98,6 +98,20 @@ class CodeController extends Controller
         ], 401);
     }
 
+    public function checkIfLimited(Request $request)
+    {
+        if ($this->hasTooManyLoginAttempts($request) && $this->throttleIsActive()) {
+            return response([
+                'too_many_attempts' => true,
+                'seconds_message'  => TransFormer::transform($this->getBlockedSeconds($request), $this->config['seconds_message']),
+            ], 401);
+        }
+
+        return response([
+            'too_many_attempts' => false,
+        ], 200);
+    }
+
     /**
      * Determine if throttle is activated in config file.
      *
