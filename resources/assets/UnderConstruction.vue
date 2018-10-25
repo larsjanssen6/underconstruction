@@ -224,6 +224,11 @@
                         return;
                     }
 
+                    //for numpad
+                    if(key >= 96 && key <= 105) {
+                        key -= 48;
+                    }
+
                     let number = parseInt(String.fromCharCode(key));
 
                     if (isNaN(number)) {
