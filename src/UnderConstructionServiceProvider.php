@@ -46,7 +46,7 @@ class UnderConstructionServiceProvider extends ServiceProvider
 
             $router->post('checkiflimited', [
                 'uses' => 'CodeController@checkIfLimited',
-                'as' => 'underconstruction.checkiflimited'
+                'as' => 'underconstruction.checkiflimited',
             ]);
 
             $router->get('construction', [
