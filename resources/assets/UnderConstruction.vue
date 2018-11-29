@@ -4,15 +4,17 @@
             {{ title }}
         </div>
 
-        <div v-if="attempts_left != false">
+        <div v-if="attempts_left !== false">
             <p>{{ attempts_left }}</p>
         </div>
 
-        <div v-if="seconds_message != false">
+        <div v-if="seconds_message !== false">
             <p>{{ seconds_message }}</p>
         </div>
 
-        <div class="panel flex flex-column" :class="{ wrong_code: wrongCode, success_code: success }">
+        <div class="panel flex flex-column relative" :class="{ wrong_code: wrongCode, success_code: success }">
+            <loader v-if="showLoader & isLoading"></loader>
+
             <div class="flex-one">
                 <div class="flex full-height">
                     <div class="flex-one number" v-for="number in 4">
@@ -64,12 +66,18 @@
 </template>
 
 <script>
+    import Loader from './Loader';
+    import 'vue-loading-overlay/dist/vue-loading.css';
+
     export default {
+        components: { Loader },
+
         props: [
             'title',
             'backButton',
             'redirectUrl',
             'showButton',
+            'showLoader',
             'hideButton'
         ],
 
@@ -83,7 +91,8 @@
                 success: false,
                 seconds_message: false,
                 attempts_left: false,
-                seconds: 0
+                seconds: 0,
+                isLoading: false
             }
         },
 
@@ -96,6 +105,7 @@
         mounted() {
             this.registerKeys();
             this.resetCode();
+            this.checkIfLimited();
         },
 
         methods: {
@@ -114,6 +124,7 @@
                 if(!this.seconds_message) {
                     this.setNumber(number);
                     if(this.codeIsComplete()) {
+                        this.isLoading = true;
                         axios.post("/under/check", { "code": this.real_code.join("") })
                             .then(() => {
                                 this.success = true;
@@ -129,6 +140,9 @@
                                     this.attempts_left = error.response.data.attempts_left;
                                 }
                                 this.resetCode();
+                            })
+                            .finally(() => {
+                                this.isLoading = false;
                             });
                     }
                 }
@@ -197,20 +211,30 @@
              * Register all keyboard numbers.
              */
             registerKeys() {
-                document.addEventListener("keypress", (e) => {
-                    if (e.keyCode == 8) {
+                document.addEventListener("keydown", (e) => {
+                    e.preventDefault();
+                    let key = e.which || e.charCode || e.keyCode || 0;
+
+                    if (key == 8) {
                         this.back();
 
                         return;
                     }
 
-                    let number = parseInt(String.fromCharCode(e.keyCode));
+                    //for numpad
+                    if(key >= 96 && key <= 105) {
+                        key -= 48;
+                    }
+
+                    let number = parseInt(String.fromCharCode(key));
 
                     if (isNaN(number)) {
                         return;
                     }
 
-                    this.addNumber(number);
+                    if(!this.isLoading) {
+                        this.addNumber(number);
+                    }
                 });
             },
 
@@ -220,7 +244,6 @@
             togglePassword() {
                 this.hide_code = !this.hide_code;
 
-                //update already entered code
                 this.code = ['*', '*', '*', '*'];
                 for ( let i = 0; i < this.position; i++ ) {
                     if ( this.hide_code ) {
@@ -230,6 +253,27 @@
                     }
                 }
 
+            },
+
+            /**
+             * Run at start to check whether user been limited from server
+             */
+            checkIfLimited() {
+                this.isLoading = true;
+                axios.post("/under/checkiflimited")
+                    .catch((error) => {
+                        this.wrongCode = true;
+                        setTimeout(() => this.wrongCode = false, 5000);
+                        if(this.tooManyAttempts(error)) {
+                            this.countDown(error.response.data.seconds_message);
+                        }
+                        else {
+                            this.attempts_left = error.response.data.attempts_left;
+                        }
+                    })
+                    .finally(() => {
+                        this.isLoading = false;
+                    });
             }
         }
     }
@@ -304,6 +348,9 @@
     .title
         font-size: 84px
         margin-bottom: 40px
+
+    .relative
+        position: relative
 
     @media only screen and (max-width: $mobile-break-point)
         .title

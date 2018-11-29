@@ -28,6 +28,7 @@
             :back-button="{{ @json_encode($backButton) }}"
             :show-button="{{ @json_encode($showButton) }}"
             :hide-button="{{ @json_encode($hideButton) }}"
+            :show-loader="{{ @json_encode($showLoader) }}"
             :redirect-url="{{ @json_encode($redirectUrl) }}">
     </under-construction>
 </div>
