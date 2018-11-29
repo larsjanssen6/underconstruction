@@ -30,6 +30,10 @@ class UnderConstruction
      */
     public function handle($request, Closure $next)
     {
+        if ($request->is('under/*')) {
+            return $next($request);
+        }
+
         if (! $this->config['enabled']) {
             return $next($request);
         }
