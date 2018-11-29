@@ -57,6 +57,7 @@ class CodeController extends Controller
             'backButton'  => $this->config['back-button'],
             'showButton'  => $this->config['show-button'],
             'hideButton'  => $this->config['hide-button'],
+            'showLoader'  => $this->config['show-loader'],
             'redirectUrl' => session()->get('intended.url', $this->config['redirect-url']),
         ]);
     }

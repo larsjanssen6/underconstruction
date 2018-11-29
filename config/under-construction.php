@@ -33,6 +33,11 @@ return [
     'hide-button' => 'hide',
 
     /*
+     * Show loader.
+     */
+    'show-loader' => true,
+
+    /*
      * Redirect url after a successful login.
      */
     'redirect-url' => '/',

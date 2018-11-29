@@ -1,22 +1,20 @@
 <template>
     <div class="flex-center flex-column full-height-vh" :class="{ body_warning: wrongCode, body_success: success }">
-        <loading :active.sync="isLoading"
-                 :can-cancel="false"
-                 :is-full-page="true"></loading>
-
         <div class="title">
             {{ title }}
         </div>
 
-        <div v-if="attempts_left != false">
+        <div v-if="attempts_left !== false">
             <p>{{ attempts_left }}</p>
         </div>
 
-        <div v-if="seconds_message != false">
+        <div v-if="seconds_message !== false">
             <p>{{ seconds_message }}</p>
         </div>
 
-        <div class="panel flex flex-column" :class="{ wrong_code: wrongCode, success_code: success }">
+        <div class="panel flex flex-column relative" :class="{ wrong_code: wrongCode, success_code: success }">
+            <loader v-if="showLoader & isLoading"></loader>
+
             <div class="flex-one">
                 <div class="flex full-height">
                     <div class="flex-one number" v-for="number in 4">
@@ -68,15 +66,18 @@
 </template>
 
 <script>
-    import Loading from 'vue-loading-overlay';
+    import Loader from './Loader';
     import 'vue-loading-overlay/dist/vue-loading.css';
 
     export default {
+        components: { Loader },
+
         props: [
             'title',
             'backButton',
             'redirectUrl',
             'showButton',
+            'showLoader',
             'hideButton'
         ],
 
@@ -105,10 +106,6 @@
             this.registerKeys();
             this.resetCode();
             this.checkIfLimited();
-        },
-
-        components: {
-            Loading
         },
 
         methods: {
@@ -247,7 +244,6 @@
             togglePassword() {
                 this.hide_code = !this.hide_code;
 
-                //update already entered code
                 this.code = ['*', '*', '*', '*'];
                 for ( let i = 0; i < this.position; i++ ) {
                     if ( this.hide_code ) {
@@ -260,7 +256,7 @@
             },
 
             /**
-             * run at start to check whether user been limited from server
+             * Run at start to check whether user been limited from server
              */
             checkIfLimited() {
                 this.isLoading = true;
@@ -352,6 +348,9 @@
     .title
         font-size: 84px
         margin-bottom: 40px
+
+    .relative
+        position: relative
 
     @media only screen and (max-width: $mobile-break-point)
         .title
