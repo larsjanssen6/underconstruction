@@ -67,7 +67,6 @@
 
 <script>
     import Loader from './Loader';
-    import 'vue-loading-overlay/dist/vue-loading.css';
 
     export default {
         components: { Loader },
