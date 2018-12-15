@@ -3,8 +3,9 @@
 namespace LarsJanssen\UnderConstruction\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
+use Illuminate\Config\Repository;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Filesystem\Filesystem;
 
 class SetCodeCommand extends Command
 {
@@ -23,6 +24,13 @@ class SetCodeCommand extends Command
     protected $description = 'Set here the under construction code';
 
     /**
+     * Configurations from config file.
+     *
+     * @var array
+     */
+    protected $config;
+
+    /**
      * @var \Illuminate\Filesystem\Filesystem
      */
     protected $filesystem;
@@ -30,11 +38,13 @@ class SetCodeCommand extends Command
     /**
      * Create a new command instance.
      *
+     * @param Repository $config
      * @param Filesystem $filesystem
      */
-    public function __construct(Filesystem $filesystem)
+    public function __construct(Repository $config, Filesystem $filesystem)
     {
         parent::__construct();
+        $this->config = $config->get('under-construction');
         $this->filesystem = $filesystem;
     }
 
@@ -42,6 +52,7 @@ class SetCodeCommand extends Command
      * Execute the console command.
      *
      * @return mixed
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function handle()
     {
@@ -52,7 +63,7 @@ class SetCodeCommand extends Command
             $this->setHashInEnvironmentFile($hash);
             $this->info(sprintf('Code: "%s" is set successfully.', $code));
         } else {
-            $this->error('Wrong input. Code should contain 4 numbers.');
+            $this->error(sprintf('Wrong input. Code should contain %s numbers (see config file), and can\'t be greater then 6.', $this->config['total_digits']));
         }
     }
 
@@ -60,6 +71,7 @@ class SetCodeCommand extends Command
      * Set the hash in .env file.
      *
      * @param $hash
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     protected function setHashInEnvironmentFile($hash)
     {
@@ -96,6 +108,8 @@ class SetCodeCommand extends Command
      */
     public function validate($code): bool
     {
-        return ctype_digit($code) && strlen($code) == 4;
+        $codeLength = strlen($code);
+
+        return ctype_digit($code) && $codeLength == $this->config['total_digits'] && strlen($code) <= 6;
     }
 }

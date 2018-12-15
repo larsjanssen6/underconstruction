@@ -3,12 +3,12 @@
 namespace LarsJanssen\UnderConstruction\Controllers;
 
 use Exception;
-use Illuminate\Config\Repository;
 use Illuminate\Http\Request;
+use Illuminate\Config\Repository;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
-use LarsJanssen\UnderConstruction\Facades\TransFormer;
 use LarsJanssen\UnderConstruction\Throttle;
+use LarsJanssen\UnderConstruction\Facades\TransFormer;
 
 class CodeController extends Controller
 {
@@ -58,6 +58,7 @@ class CodeController extends Controller
             'showButton'  => $this->config['show-button'],
             'hideButton'  => $this->config['hide-button'],
             'showLoader'  => $this->config['show-loader'],
+            'totalDigits' => $this->config['total_digits'],
             'redirectUrl' => session()->get('intended.url', $this->config['redirect-url']),
         ]);
     }
