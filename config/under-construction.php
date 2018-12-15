@@ -52,8 +52,13 @@ return [
         | Throttle settings (only when throttle is true)
         |--------------------------------------------------------------------------
         |
-
         */
+
+        /*
+        * Set the amount of digits (max 6).
+        */
+        'total_digits' => 6,
+
         /*
          * Set the maximum number of attempts to allow.
          */

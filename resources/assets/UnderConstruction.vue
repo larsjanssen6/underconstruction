@@ -17,7 +17,7 @@
 
             <div class="flex-one">
                 <div class="flex full-height">
-                    <div class="flex-one number" v-for="number in 4">
+                    <div class="flex-one number" v-for="number in totalDigits">
                         <div class="flex-center full-height">
                             <h3>{{ code[number - 1] }}</h3>
                         </div>
@@ -74,10 +74,11 @@
         props: [
             'title',
             'backButton',
-            'redirectUrl',
             'showButton',
+            'hideButton',
             'showLoader',
-            'hideButton'
+            'totalDigits',
+            'redirectUrl',
         ],
 
         data() {
@@ -181,8 +182,16 @@
             },
 
             resetCode() {
-                this.code = ['*', '*', '*', '*'];
+                this.setAmountOfDigits();
                 this.position = 0;
+            },
+
+            setAmountOfDigits() {
+                this.code = [];
+
+                for ( let i = 0; i < this.totalDigits; i++ ) {
+                    this.code.push("*")
+                }
             },
 
             /**
@@ -203,7 +212,7 @@
              * Check if all numbers are entered.
              */
             codeIsComplete() {
-                return this.position == 4;
+                return this.position === this.totalDigits;
             },
 
             /**
@@ -243,7 +252,8 @@
             togglePassword() {
                 this.hide_code = !this.hide_code;
 
-                this.code = ['*', '*', '*', '*'];
+                this.setAmountOfDigits();
+
                 for ( let i = 0; i < this.position; i++ ) {
                     if ( this.hide_code ) {
                         Vue.set(this.code, i, '-' );

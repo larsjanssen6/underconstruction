@@ -29,6 +29,7 @@
             :show-button="{{ @json_encode($showButton) }}"
             :hide-button="{{ @json_encode($hideButton) }}"
             :show-loader="{{ @json_encode($showLoader) }}"
+            :total-digits="{{ @json_encode($totalDigits) }}"
             :redirect-url="{{ @json_encode($redirectUrl) }}">
     </under-construction>
 </div>

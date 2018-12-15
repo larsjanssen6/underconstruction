@@ -87,14 +87,19 @@ return [
     'back-button' => 'back',
 
     /*
-     * Show button translation.
-     */
+    * Show button translation.
+    */
     'show-button' => 'show',
 
     /*
      * Hide button translation.
      */
     'hide-button' => 'hide',
+
+    /*
+     * Show loader.
+     */
+    'show-loader' => true,
 
     /*
      * Redirect url after a successful login.
@@ -106,43 +111,53 @@ return [
      */
     'throttle' => true,
 
-    /*
-    |--------------------------------------------------------------------------
-    | Throttle settings (only when throttle is true)
-    |--------------------------------------------------------------------------
-    |
-    */
-    
-    /*
-     * Set the maximum number of attempts to allow.
-     */
-    'max_attempts' => 3,
+        /*
+        |--------------------------------------------------------------------------
+        | Throttle settings (only when throttle is true)
+        |--------------------------------------------------------------------------
+        |
+        */
 
-    /*
-     * Show attempts left.
-     */
-    'show_attempts_left' => true,
+        /*
+        * Set the amount of digits (max 6).
+        */
+        'total_digits' => 4,
 
-    /*
-     * Attempts left message.
-     */
-    'attempts_message' => 'Attempts left: %i',
+        /*
+         * Set the maximum number of attempts to allow.
+         */
+        'max_attempts' => 3,
 
-    /*
-     * Too many attempts message.
-     */
-    'seconds_message' => 'Too many attempts please try again in %i seconds.',
+        /*
+         * Show attempts left.
+         */
+        'show_attempts_left' => true,
 
-    /*
-     * Set the number of minutes to disable login.
-     */
-    'decay_minutes' => 5,
+        /*
+         * Attempts left message.
+         */
+        'attempts_message' => 'Attempts left: %i',
+
+        /*
+         * Too many attempts message.
+         */
+        'seconds_message' => 'Too many attempts please try again in %i seconds.',
+
+        /*
+         * Set the number of minutes to disable login.
+         */
+        'decay_minutes' => 5,
+
+        /*
+         * Prevent the site from being indexed by Robots when locked
+         */
+        'lock_robots' => true,
 ];
 ```
 
 ## Usage
 
-You'll have to set a 4 digit code. You can do that by running this custom
+You'll have to set a 4 digit code (you can change this up to 6 in config file). You can do that by running this custom
 artisan command (in this example the code is ```1234``` ,you can obviously set another code). It
 will generate a hash that will be stored in your `.env` file. 
 
