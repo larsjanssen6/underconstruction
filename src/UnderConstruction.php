@@ -3,9 +3,9 @@
 namespace LarsJanssen\UnderConstruction;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Config\Repository;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class UnderConstruction
 {

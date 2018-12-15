@@ -2,8 +2,8 @@
 
 namespace LarsJanssen\UnderConstruction;
 
-use Illuminate\Cache\RateLimiter;
 use Illuminate\Http\Request;
+use Illuminate\Cache\RateLimiter;
 
 trait Throttle
 {
