@@ -2,12 +2,12 @@
 
 namespace LarsJanssen\UnderConstruction\Test;
 
-use Illuminate\Routing\RouteCollection;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\RouteCollection;
+use Orchestra\Testbench\TestCase as Orchestra;
 use LarsJanssen\UnderConstruction\UnderConstruction;
 use LarsJanssen\UnderConstruction\UnderConstructionServiceProvider;
-use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
