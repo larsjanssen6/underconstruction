@@ -157,7 +157,7 @@ return [
 
 ## Usage
 
-You'll have to set a 4 digit code. You can do that by running this custom
+You'll have to set a 4 digit code (you can change this up to 6 in config file). You can do that by running this custom
 artisan command (in this example the code is ```1234``` ,you can obviously set another code). It
 will generate a hash that will be stored in your `.env` file. 
 
