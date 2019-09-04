@@ -13,7 +13,7 @@ class TestCase extends Orchestra
 {
     protected $config = [];
 
-    public function setup()
+    public function setup(): void
     {
         parent::setup();
 
