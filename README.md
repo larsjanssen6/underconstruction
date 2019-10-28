@@ -69,6 +69,19 @@ return [
     'title' => 'Under Construction',
 
     /*
+     * Custom Route Prefix
+     * */
+    'route-prefix' => env('UNDER_CONSTRUCTION_ROUTE_PREFIX','under'),
+
+    /*
+     * Custom Endpoint if you don't want to use 'construction'
+     * e.g. if you change to 'checkpoint', the route prefix
+     * above will be appended giving you 'under/checkpoint'
+     * */
+    'custom-endpoint' => env('UNDER_CONSTRUCTION_CUSTOM_ENDPOINT','construction'),
+
+
+    /*
      * Back button translation.
      */
     'back-button' => 'back',
