@@ -20,14 +20,14 @@ return [
     /*
      * Custom Route Prefix
      * */
-    'route-prefix' => env('UNDER_CONSTRUCTION_ROUTE_PREFIX','under'),
+    'route-prefix' => env('UNDER_CONSTRUCTION_ROUTE_PREFIX', 'under'),
 
     /*
      * Custom Endpoint if you don't want to use 'construction'
      * e.g. if you change to 'checkpoint', the route prefix
      * above will be appended giving you 'under/checkpoint'
      * */
-    'custom-endpoint' => env('UNDER_CONSTRUCTION_CUSTOM_ENDPOINT','construction'),
+    'custom-endpoint' => env('UNDER_CONSTRUCTION_CUSTOM_ENDPOINT', 'construction'),
 
     /*
      * Back button translation.
@@ -59,45 +59,45 @@ return [
      */
     'throttle' => true,
 
-        /*
-        |--------------------------------------------------------------------------
-        | Throttle settings (only when throttle is true)
-        |--------------------------------------------------------------------------
-        |
-        */
+    /*
+    |--------------------------------------------------------------------------
+    | Throttle settings (only when throttle is true)
+    |--------------------------------------------------------------------------
+    |
+    */
 
-        /*
-        * Set the amount of digits (max 6).
-        */
-        'total_digits' => 6,
+    /*
+    * Set the amount of digits (max 6).
+    */
+    'total_digits' => 6,
 
-        /*
-         * Set the maximum number of attempts to allow.
-         */
-        'max_attempts' => 3,
+    /*
+     * Set the maximum number of attempts to allow.
+     */
+    'max_attempts' => 3,
 
-        /*
-         * Show attempts left.
-         */
-        'show_attempts_left' => true,
+    /*
+     * Show attempts left.
+     */
+    'show_attempts_left' => true,
 
-        /*
-         * Attempts left message.
-         */
-        'attempts_message' => 'Attempts left: %i',
+    /*
+     * Attempts left message.
+     */
+    'attempts_message' => 'Attempts left: %i',
 
-        /*
-         * Too many attempts message.
-         */
-        'seconds_message' => 'Too many attempts please try again in %i seconds.',
+    /*
+     * Too many attempts message.
+     */
+    'seconds_message' => 'Too many attempts please try again in %i seconds.',
 
-        /*
-         * Set the number of minutes to disable login.
-         */
-        'decay_minutes' => 5,
+    /*
+     * Set the number of minutes to disable login.
+     */
+    'decay_minutes' => 5,
 
-        /*
-         * Prevent the site from being indexed by Robots when locked
-         */
-        'lock_robots' => true,
+    /*
+     * Prevent the site from being indexed by Robots when locked
+     */
+    'lock_robots' => true,
 ];
