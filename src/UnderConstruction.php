@@ -30,7 +30,7 @@ class UnderConstruction
      */
     public function handle($request, Closure $next)
     {
-        if ($request->is('under/*')) {
+        if ($request->is($this->config['route-prefix'].'/*')) {
             return $next($request);
         }
 
@@ -41,7 +41,7 @@ class UnderConstruction
         if (! $this->hasAccess($request)) {
             session(['intended.url' => url()->current()]);
 
-            return new RedirectResponse('/under/construction');
+            return new RedirectResponse($this->config['route-prefix'].'/'.$this->config['custom-endpoint']);
         }
 
         return $next($request);

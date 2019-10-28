@@ -125,7 +125,7 @@
                     this.setNumber(number);
                     if(this.codeIsComplete()) {
                         this.isLoading = true;
-                        axios.post("/under/check", { "code": this.real_code.join("") })
+                        axios.post("check", { "code": this.real_code.join("") })
                             .then(() => {
                                 this.success = true;
                                 window.location.href = this.redirectUrl;
@@ -269,7 +269,7 @@
              */
             checkIfLimited() {
                 this.isLoading = true;
-                axios.post("/under/checkiflimited")
+                axios.post("checkiflimited")
                     .catch((error) => {
                         this.wrongCode = true;
                         setTimeout(() => this.wrongCode = false, 5000);
