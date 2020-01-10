@@ -90,7 +90,7 @@ trait Throttle
      *
      * @return int
      */
-    public function maxAttempts() : int
+    public function maxAttempts(): int
     {
         return property_exists($this, 'maxAttempts') ? $this->maxAttempts : 5;
     }
@@ -100,7 +100,7 @@ trait Throttle
      *
      * @return int
      */
-    public function decayMinutes() : int
+    public function decayMinutes(): int
     {
         return property_exists($this, 'decayMinutes') ? $this->decayMinutes : 1;
     }
