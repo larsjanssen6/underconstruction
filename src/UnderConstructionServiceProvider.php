@@ -32,7 +32,7 @@ class UnderConstructionServiceProvider extends ServiceProvider
 
         $routeConfig = [
             'namespace'  => 'LarsJanssen\UnderConstruction\Controllers',
-            'prefix'     => 'under',
+            'prefix'     => config('under-construction.route-prefix'),
             'middleware' => [
                 'web',
             ],
@@ -49,7 +49,7 @@ class UnderConstructionServiceProvider extends ServiceProvider
                 'as' => 'underconstruction.checkiflimited',
             ]);
 
-            $router->get('construction', [
+            $router->get(config('under-construction.custom-endpoint'), [
                 'uses' => 'CodeController@index',
                 'as'   => 'underconstruction.index',
             ]);

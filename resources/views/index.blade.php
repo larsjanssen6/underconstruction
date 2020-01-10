@@ -34,6 +34,6 @@
     </under-construction>
 </div>
 
-<script src="/under/js"></script>
+<script src="/{{config('under-construction.route-prefix')}}/js"></script>
 </body>
 </html>
