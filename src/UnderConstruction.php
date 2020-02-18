@@ -41,7 +41,7 @@ class UnderConstruction
         if (! $this->hasAccess($request)) {
             session(['intended.url' => url()->current()]);
 
-            return new RedirectResponse($this->config['route-prefix'].'/'.$this->config['custom-endpoint']);
+            return new RedirectResponse('/'.$this->config['route-prefix'].'/'.$this->config['custom-endpoint']);
         }
 
         return $next($request);
