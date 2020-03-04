@@ -98,6 +98,6 @@ class UnderConstructionModeTest extends TestCase
         $this->get('/test')
             ->assertSessionMissing('can_visit')
             ->assertRedirect()
-            ->assertHeader('location', 'under/construction');
+            ->assertHeader('location', '/under/construction');
     }
 }
