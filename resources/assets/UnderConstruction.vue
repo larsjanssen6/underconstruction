@@ -345,8 +345,11 @@
         margin: 10px
         border-bottom: 1px solid #DCDCDE
         cursor: pointer
-
         div
+            -webkit-user-select: none
+            -moz-user-select: none
+            -ms-user-select: none
+            user-select: none
             h3
                 font-size: 15px
                 font-weight: 900
@@ -364,5 +367,4 @@
     @media only screen and (max-width: $mobile-break-point)
         .title
             display: none
-
 </style>
