@@ -82,9 +82,9 @@ class SetCodeCommand extends Command
 
         if (preg_match($regex, $envContent)) {
             $hash = str_replace(['\\', '$'], ['', '\$'], $hash);
-            $envContent = preg_replace($regex, $this->newLine($hash), $envContent);
+            $envContent = preg_replace($regex, $this->displayHash($hash), $envContent);
         } else {
-            $envContent .= "\n".$this->newLine($hash)."\n";
+            $envContent .= "\n".$this->displayHash($hash)."\n";
         }
 
         $this->filesystem->put($envPath, $envContent);
@@ -94,7 +94,7 @@ class SetCodeCommand extends Command
      * @param $hash
      * @return string
      */
-    private function newLine($hash)
+    private function displayHash($hash)
     {
         return "UNDER_CONSTRUCTION_HASH=$hash";
     }
