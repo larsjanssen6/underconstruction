@@ -38,7 +38,7 @@ class CodeController extends Controller
     /**
      * CodeController constructor.
      *
-     * @param Repository $config
+     * @param  Repository  $config
      */
     public function __construct(Repository $config)
     {
@@ -67,11 +67,10 @@ class CodeController extends Controller
      * Check if the given code is correct,
      * then return the proper response.
      *
-     * @param Request $request
+     * @param  Request  $request
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @throws Exception
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function check(Request $request)
     {
@@ -127,8 +126,7 @@ class CodeController extends Controller
     /**
      * Determine attempts that are left.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return int | bool
      */
     private function showAttempts(Request $request)
@@ -143,9 +141,9 @@ class CodeController extends Controller
     /**
      * Get the hash from .txt file.
      *
-     * @throws Exception
-     *
      * @return bool|string
+     *
+     * @throws Exception
      */
     private function getHash()
     {

@@ -38,8 +38,8 @@ class SetCodeCommand extends Command
     /**
      * Create a new command instance.
      *
-     * @param Repository $config
-     * @param Filesystem $filesystem
+     * @param  Repository  $config
+     * @param  Filesystem  $filesystem
      */
     public function __construct(Repository $config, Filesystem $filesystem)
     {
@@ -52,6 +52,7 @@ class SetCodeCommand extends Command
      * Execute the console command.
      *
      * @return mixed
+     *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function handle()
@@ -71,6 +72,7 @@ class SetCodeCommand extends Command
      * Set the hash in .env file.
      *
      * @param $hash
+     *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     protected function setHashInEnvironmentFile($hash)
@@ -103,7 +105,6 @@ class SetCodeCommand extends Command
      * Check if given code is valid.
      *
      * @param $code
-     *
      * @return bool
      */
     public function validate($code): bool

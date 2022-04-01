@@ -16,7 +16,8 @@ class UnderConstruction
 
     /**
      * UnderConstruction constructor.
-     * @param Repository $config
+     *
+     * @param  Repository  $config
      */
     public function __construct(Repository $config)
     {
@@ -25,7 +26,7 @@ class UnderConstruction
 
     /**
      * @param $request
-     * @param Closure $next
+     * @param  Closure  $next
      * @return RedirectResponse|mixed
      */
     public function handle($request, Closure $next)
@@ -48,7 +49,7 @@ class UnderConstruction
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return bool
      */
     protected function hasAccess(Request $request)
